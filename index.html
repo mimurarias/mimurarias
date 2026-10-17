@@ -1,19 +1,360 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mimurarias - Páginas públicas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mimurarias — Aplicativos, jogos e livros</title>
+  <meta name="description" content="Espaço de projetos pessoais da Mimurarias: aplicativos Android utilitários, jogos e livros publicados na Amazon por Paula Mimura.">
+  <meta name="author" content="Mimurarias">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <h1>Mimurarias</h1>
-    <p>Páginas públicas dos aplicativos.</p>
-    <h2>Políticas de privacidade</h2>
-    <ul>
-        <li><a href="flashlight/privacy.html">Lanterna SOS Strobe (Flashlight)</a> &mdash; <a href="flashlight/privacy-en.html">English</a></li>
-        <li><a href="pingtest/privacy.html">Network Ping Test (pingtest)</a></li>
-        <li><a href="tictactoe/privacy.html">Tic Tac Toe</a> &mdash; <a href="tictactoe/privacy-en.html">English</a></li>
-        <li><a href="apkappsec/privacy.html">APK AppSec / Privacy Audit</a> &mdash; <a href="apkappsec/privacy-en.html">English</a></li>
-    </ul>
+
+  <!-- Top Header / Navigation -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="brand-icon">M</div>
+        <span>Mimurarias</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#apps">Aplicativos</a></li>
+          <li><a href="#games">Jogos</a></li>
+          <li><a href="#books">Livros</a></li>
+          <li><a href="#privacy">Políticas</a></li>
+          <li><a href="#contact">Contato</a></li>
+        </ul>
+      </nav>
+
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar tema">
+        ☀️
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1 class="hero-title" style="margin-bottom: 2rem;">
+      <span class="gradient-text">Aplicativos, jogos e livros.</span>
+    </h1>
+    <div class="hero-actions">
+      <a href="#apps" class="btn btn-primary">Ver Aplicativos Play Store</a>
+      <a href="#books" class="btn btn-outline">Ver Livros na Amazon</a>
+      <a href="https://play.google.com/store/apps/developer?id=Mimurarias" target="_blank" rel="noopener" class="btn btn-outline">Perfil Google Play ↗</a>
+    </div>
+  </section>
+
+  <!-- Filter Buttons -->
+  <div class="filter-container">
+    <button class="filter-btn active" data-filter="all">Todos os Projetos</button>
+    <button class="filter-btn" data-filter="apps">📱 Aplicativos (4)</button>
+    <button class="filter-btn" data-filter="games">🎮 Jogos</button>
+    <button class="filter-btn" data-filter="books">📚 Livros Amazon (4)</button>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <!-- 1. Aplicativos Móveis (4 Apps Play Store) -->
+    <section id="apps" class="section-block" data-category="apps">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>📱</span> Aplicativos no Google Play
+        </h2>
+        <span class="section-count">4 Apps • Android • Offline-first</span>
+      </div>
+
+      <div class="cards-grid">
+
+        <!-- 1. APK AppSec -->
+        <article class="project-card">
+          <div class="card-media">
+            <img src="assets/images/apkappsec-banner.png" alt="APK AppSec Banner" loading="lazy">
+            <div class="card-icon-overlay">
+              <img src="assets/images/apkappsec-icon.png" alt="APK AppSec Ícone">
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">APK AppSec</h3>
+            <p class="card-desc">
+              Auditoria estática de segurança e conformidade para arquivos APK diretamente no aparelho. Identifica segredos expostos, diagnóstico R8/ProGuard e flags de manifesto 100% offline.
+            </p>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.apkappsec" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.55rem 1.1rem; font-size: 0.88rem; width: 100%;">Google Play ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Tic Tac Toe -->
+        <article class="project-card">
+          <div class="card-media">
+            <img src="assets/images/tictactoe-banner.png" alt="Tic Tac Toe Banner" loading="lazy">
+            <div class="card-icon-overlay">
+              <img src="assets/images/tictactoe-icon.png" alt="Tic Tac Toe Ícone">
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">Tic Tac Toe</h3>
+            <p class="card-desc">
+              Jogo da Velha com design refinado em glassmorphism, suporte para 2 jogadores locais e Inteligência Artificial Minimax com diferentes níveis de desafio. Áudio e hápticos imersivos.
+            </p>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.tictactoe" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.55rem 1.1rem; font-size: 0.88rem; width: 100%;">Google Play ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Network Ping Test -->
+        <article class="project-card">
+          <div class="card-media">
+            <img src="assets/images/pingtest-banner.jpg" alt="Network Ping Test Banner" loading="lazy">
+            <div class="card-icon-overlay">
+              <img src="assets/images/pingtest-icon.png" alt="Network Ping Test Ícone">
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">Network Ping Test</h3>
+            <p class="card-desc">
+              Testador de latência e conectividade de rede com precisão milimétrica. Diagnóstico visual com gráficos em tempo real, estatísticas de perda de pacotes e histórico de conexões.
+            </p>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.pingtest" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.55rem 1.1rem; font-size: 0.88rem; width: 100%;">Google Play ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Flashlight & Strobe -->
+        <article class="project-card">
+          <div class="card-media">
+            <img src="assets/images/flashlight-banner.png" alt="Flashlight Banner" loading="lazy">
+            <div class="card-icon-overlay">
+              <img src="assets/images/flashlight-icon.png" alt="Flashlight Ícone">
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">Lanterna SOS Strobe</h3>
+            <p class="card-desc">
+              Lanterna de alto contraste com estroboscópio regulável (1 a 30 Hz), sinalizador SOS de emergência e resposta háptica detalhada com pulso tátil para ligar e desligar.
+            </p>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.flashlight" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.55rem 1.1rem; font-size: 0.88rem; width: 100%;">Google Play ↗</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 2. Jogos -->
+    <section id="games" class="section-block" data-category="games">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>🎮</span> Jogos
+        </h2>
+        <span class="section-count">Estratégia & Tabuleiro</span>
+      </div>
+
+      <div class="cards-grid">
+
+        <!-- Tic Tac Toe Game Card -->
+        <article class="project-card">
+          <div class="card-media">
+            <img src="assets/images/tictactoe-banner.png" alt="Tic Tac Toe Banner" loading="lazy">
+            <div class="card-icon-overlay">
+              <img src="assets/images/tictactoe-icon.png" alt="Tic Tac Toe Ícone">
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">Tic Tac Toe</h3>
+            <p class="card-desc">
+              Modos 2 Jogadores no mesmo dispositivo ou contra a Inteligência Artificial Minimax. Interface em glassmorphism com animações e efeitos táteis.
+            </p>
+            <div class="card-actions">
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.tictactoe" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 0.55rem 1.1rem; font-size: 0.88rem; width: 100%;">Google Play ↗</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 3. Livros na Amazon (4 Livros Publicados) -->
+    <section id="books" class="section-block" data-category="books">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>📚</span> Livros Publicados na Amazon
+        </h2>
+        <span class="section-count">4 Livros • Kindle Direct Publishing (KDP)</span>
+      </div>
+
+      <div class="cards-grid">
+
+        <!-- 1. A Cachorrinha Baleia -->
+        <article class="project-card book-card">
+          <div class="card-media">
+            <img src="assets/images/livro-baleia-amazon.jpg" alt="Livro A Cachorrinha Baleia" loading="lazy">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">A Cachorrinha Baleia</h3>
+            <p class="card-desc">
+              Adaptação sensível e ricamente ilustrada inspirada no clássico literário, formatada em layout fixo de alta definição para leitores digitais Kindle.
+            </p>
+            <div class="card-actions">
+              <a href="https://www.amazon.com.br/dp/B0HJ3ZJ4HK" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; border-color: #ff9900; color: #ff9900; font-size: 0.88rem; padding: 0.55rem 1.1rem;">Comprar na Amazon ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Iara -->
+        <article class="project-card book-card">
+          <div class="card-media">
+            <img src="assets/images/livro-iara-amazon.jpg" alt="Livro Iara" loading="lazy">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">Iara</h3>
+            <p class="card-desc">
+              Obra infantil celebrando o folclore brasileiro, trazendo arte encantadora, versos e uma narrativa lúdica sobre a protetora dos rios e das matas.
+            </p>
+            <div class="card-actions">
+              <a href="https://www.amazon.com.br/dp/B0HJMSP3G2" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; border-color: #ff9900; color: #ff9900; font-size: 0.88rem; padding: 0.55rem 1.1rem;">Comprar na Amazon ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Saci Pererê -->
+        <article class="project-card book-card">
+          <div class="card-media">
+            <img src="assets/images/livro-saci-capa.jpg" alt="Livro Saci Pererê" loading="lazy">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">Saci Pererê</h3>
+            <p class="card-desc">
+              As travessuras do personagem mais emblemático do nosso folclore contadas de forma mágica, acessível e divertida para jovens leitores.
+            </p>
+            <div class="card-actions">
+              <a href="https://www.amazon.com.br/dp/B0D922P1S6" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; border-color: #ff9900; color: #ff9900; font-size: 0.88rem; padding: 0.55rem 1.1rem;">Comprar na Amazon ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Crônicas Selecionadas -->
+        <article class="project-card book-card">
+          <div class="card-media">
+            <img src="assets/images/livro-cronicas-capa.jpg" alt="Livro Crônicas Selecionadas" loading="lazy">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">Crônicas Selecionadas</h3>
+            <p class="card-desc">
+              Coletânea de reflexões, crônicas e olhares sobre o cotidiano, histórias de vida e sentimentos traduzidos em palavras envolventes.
+            </p>
+            <div class="card-actions">
+              <a href="https://www.amazon.com.br/dp/B0HFR3DBLC" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; border-color: #ff9900; color: #ff9900; font-size: 0.88rem; padding: 0.55rem 1.1rem;">Comprar na Amazon ↗</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 4. Central de Políticas de Privacidade (Preservada para a Play Store) -->
+    <section id="privacy" class="privacy-hub">
+      <div class="privacy-hub-header">
+        <h2>🔒 Central de Políticas de Privacidade & Termos</h2>
+        <p>
+          Documentos e transparência de privacidade oficiais exigidos pelo Google Play para conformidade legal. Todas as rotas abaixo permanecem ativas e inalteradas.
+        </p>
+      </div>
+
+      <div class="privacy-grid">
+        <div class="privacy-item">
+          <div class="privacy-item-title">APK AppSec / Privacy Audit</div>
+          <div class="privacy-item-links">
+            <a href="apkappsec/privacy.html" class="privacy-link">Português (Brasil) →</a>
+            <a href="apkappsec/privacy-en.html" class="privacy-link">English →</a>
+          </div>
+        </div>
+
+        <div class="privacy-item">
+          <div class="privacy-item-title">Tic Tac Toe (Jogo da Velha)</div>
+          <div class="privacy-item-links">
+            <a href="tictactoe/privacy.html" class="privacy-link">Português (Brasil) →</a>
+            <a href="tictactoe/privacy-en.html" class="privacy-link">English →</a>
+          </div>
+        </div>
+
+        <div class="privacy-item">
+          <div class="privacy-item-title">Network Ping Test</div>
+          <div class="privacy-item-links">
+            <a href="pingtest/privacy.html" class="privacy-link">Política de Privacidade →</a>
+          </div>
+        </div>
+
+        <div class="privacy-item">
+          <div class="privacy-item-title">Lanterna SOS Strobe (Flashlight)</div>
+          <div class="privacy-item-links">
+            <a href="flashlight/privacy.html" class="privacy-link">Português (Brasil) →</a>
+            <a href="flashlight/privacy-en.html" class="privacy-link">English →</a>
+          </div>
+        </div>
+
+        <div class="privacy-item">
+          <div class="privacy-item-title">Geo Tools (Página Pública)</div>
+          <div class="privacy-item-links">
+            <a href="geotools/privacy.html" class="privacy-link">Português (Brasil) →</a>
+            <a href="geotools/privacy-en.html" class="privacy-link">English →</a>
+          </div>
+        </div>
+
+        <div class="privacy-item">
+          <div class="privacy-item-title">Google AdMob (app-ads.txt)</div>
+          <div class="privacy-item-links">
+            <a href="app-ads.txt" class="privacy-link">Ver app-ads.txt direto →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer id="contact" class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div>
+          <div class="brand-logo" style="margin-bottom: 0.5rem;">
+            <div class="brand-icon">M</div>
+            <span>Mimurarias</span>
+          </div>
+          <p style="color: var(--text-muted); max-width: 440px;">
+            Espaço de projetos pessoais: aplicativos utilitários e offline para Android, jogos e publicações infantis e literárias na Amazon.
+          </p>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="https://play.google.com/store/apps/developer?id=Mimurarias" target="_blank" rel="noopener">Google Play Store</a></li>
+          <li><a href="https://github.com/emimura" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:emimura@gmail.com">Contato (emimura@gmail.com)</a></li>
+          <li><a href="app-ads.txt">AdMob Ads</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Mimurarias. Todos os direitos reservados.
+        </div>
+        <div>
+          Hospedado via Cloudflare &bull; Domínio oficial <a href="https://www.mimurarias.com" style="color: inherit;">www.mimurarias.com</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
