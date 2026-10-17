@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Labirinto da Lua Diferente 🌙</title>
+  <style>
+    :root {
+      --bg-primary: #0a0f1d;
+      --bg-secondary: #111827;
+      --bg-card: rgba(26, 34, 53, 0.85);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-color: #6366f1;
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      --radius-lg: 16px;
+      --radius-md: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.08) 50%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      text-align: center;
+      z-index: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .game-container {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .game-stats {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .game-stats span {
+      color: var(--text-primary);
+    }
+
+    canvas {
+      background: #0f172a;
+      border-radius: var(--radius-md);
+      box-shadow: inset 0 4px 8px rgba(0,0,0,0.4);
+      display: block;
+      touch-action: none;
+    }
+
+    /* D-Pad On-Screen Controls for Mobile / Touch */
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      grid-template-rows: repeat(2, 60px);
+      gap: 10px;
+      margin-top: 1rem;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .ctrl-btn {
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      border-radius: 50%;
+      color: var(--text-primary);
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .ctrl-btn:active, .ctrl-btn.pressed {
+      background: var(--accent-color);
+      transform: scale(0.92);
+    }
+
+    .ctrl-up { grid-column: 2; grid-row: 1; }
+    .ctrl-left { grid-column: 1; grid-row: 2; }
+    .ctrl-down { grid-column: 2; grid-row: 2; }
+    .ctrl-right { grid-column: 3; grid-row: 2; }
+
+    .menu-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 15, 29, 0.92);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .menu-overlay h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .menu-overlay p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      max-width: 280px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      background: var(--accent-gradient);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.75rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+    }
+
+    .footer-note {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .footer-note a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+      .controls {
+        display: none; /* Desktop uses arrow keys */
+      }
+      .desktop-hint {
+        display: block;
+      }
+    }
+    @media (max-width: 767px) {
+      .desktop-hint {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Labirinto da Lua Diferente 🌙</h1>
+    <div class="subtitle">Guie a Lua até a Estrela Dourada!</div>
+  </header>
+
+  <div class="game-container">
+    <div class="game-stats">
+      <div>Nível: <span id="level-val">1</span></div>
+      <div>Passos: <span id="steps-val">0</span></div>
+    </div>
+
+    <canvas id="gameCanvas" width="360" height="360"></canvas>
+
+    <div class="desktop-hint" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.75rem; text-align: center;">
+      Use as <b>Setas do Teclado</b> ou <b>WASD</b> para mover.
+    </div>
+
+    <!-- Start / Win Screen Overlay -->
+    <div id="menuOverlay" class="menu-overlay">
+      <h2 id="menuTitle">Labirinto Espacial</h2>
+      <p id="menuDesc">Ajude a Lua Diferente a encontrar o caminho através das estrelas até o objetivo!</p>
+      <button id="startBtn" class="btn" onclick="startGame()">Jogar Agora</button>
+    </div>
+  </div>
+
+  <!-- Touch D-Pad -->
+  <div class="controls">
+    <button class="ctrl-btn ctrl-up" ontouchstart="movePlayer(0, -1); event.preventDefault();" onclick="movePlayer(0, -1)">⬆️</button>
+    <button class="ctrl-btn ctrl-left" ontouchstart="movePlayer(-1, 0); event.preventDefault();" onclick="movePlayer(-1, 0)">⬅️</button>
+    <button class="ctrl-btn ctrl-down" ontouchstart="movePlayer(0, 1); event.preventDefault();" onclick="movePlayer(0, 1)">⬇️</button>
+    <button class="ctrl-btn ctrl-right" ontouchstart="movePlayer(1, 0); event.preventDefault();" onclick="movePlayer(1, 0)">➡</button>
+  </div>
+
+  <div class="footer-note">
+    Mimurarias &bull; <a href="../../index.html">Voltar ao Portfólio</a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const levelValEl = document.getElementById('level-val');
+    const stepsValEl = document.getElementById('steps-val');
+    const menuOverlay = document.getElementById('menuOverlay');
+    const menuTitle = document.getElementById('menuTitle');
+    const menuDesc = document.getElementById('menuDesc');
+    const startBtn = document.getElementById('startBtn');
+
+    // Game variables
+    let tileSize = 30;
+    let gridCols = 11; // Must be odd
+    let gridRows = 11; // Must be odd
+    let level = 1;
+    let steps = 0;
+    let gameActive = false;
+
+    let player = { x: 1, y: 1 };
+    let goal = { x: 9, y: 9 };
+    let maze = []; // 1 for wall, 0 for path
+
+    // Optional custom image for Lua Diferente (if user adds assets/lua-diferente.png later)
+    let luaImg = new Image();
+    let imgLoaded = false;
+    luaImg.src = '../../assets/images/luadiferente-icon.png';
+    luaImg.onload = () => { imgLoaded = true; };
+
+    // Audio context for procedural sound effects
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playSound(type) {
+      try {
+        initAudio();
+        if (!audioCtx) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'move') {
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(220, now + 0.05);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'win') {
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+          osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.linearRampToValueAtTime(0.01, now + 0.6);
+          osc.start(now);
+          osc.stop(now + 0.6);
+        }
+      } catch (e) {
+        // Ignore audio errors if blocked
+      }
+    }
+
+    function startGame() {
+      menuOverlay.style.display = 'none';
+      level = 1;
+      steps = 0;
+      initLevel();
+      gameActive = true;
+    }
+
+    function nextLevel() {
+      level++;
+      initLevel();
+      gameActive = true;
+    }
+
+    function initLevel() {
+      // Adjust maze size based on level
+      gridCols = 9 + (level * 2); // 11, 13, 15, 17...
+      gridRows = 9 + (level * 2);
+
+      // Cap max size to fit canvas nicely
+      if (gridCols > 17) gridCols = 17;
+      if (gridRows > 17) gridRows = 17;
+
+      tileSize = Math.floor(360 / gridCols);
+      canvas.width = gridCols * tileSize;
+      canvas.height = gridRows * tileSize;
+
+      generateMaze();
+      player = { x: 1, y: 1 };
+      goal = { x: gridCols - 2, y: gridRows - 2 };
+
+      levelValEl.textContent = level;
+      stepsValEl.textContent = steps;
+      draw();
+    }
+
+    // Generate maze using Recursive Backtracker algorithm
+    function generateMaze() {
+      maze = Array(gridRows).fill(0).map(() => Array(gridCols).fill(1));
+
+      function carve(x, y) {
+        maze[y][x] = 0;
+        const dirs = [
+          {dx: 0, dy: -2},
+          {dx: 0, dy: 2},
+          {dx: -2, dy: 0},
+          {dx: 2, dy: 0}
+        ].sort(() => Math.random() - 0.5);
+
+        for (let d of dirs) {
+          let nx = x + d.dx;
+          let ny = y + d.dy;
+          if (nx > 0 && nx < gridCols - 1 && ny > 0 && ny < gridRows - 1 && maze[ny][nx] === 1) {
+            maze[y + d.dy / 2][x + d.dx / 2] = 0;
+            carve(nx, ny);
+          }
+        }
+      }
+
+      carve(1, 1);
+      // Ensure start and goal are open paths
+      maze[1][1] = 0;
+      maze[gridRows - 2][gridCols - 2] = 0;
+    }
+
+    function movePlayer(dx, dy) {
+      if (!gameActive) return;
+
+      let newX = player.x + dx;
+      let newY = player.y + dy;
+
+      if (newX >= 0 && newX < gridCols && newY >= 0 && newY < gridRows) {
+        if (maze[newY][newX] === 0) {
+          player.x = newX;
+          player.y = newY;
+          steps++;
+          stepsValEl.textContent = steps;
+          playSound('move');
+          draw();
+
+          // Check win condition
+          if (player.x === goal.x && player.y === goal.y) {
+            gameActive = false;
+            playSound('win');
+            showWinScreen();
+          }
+        }
+      }
+    }
+
+    function showWinScreen() {
+      menuTitle.textContent = `Nível ${level} Concluído! 🎉`;
+      menuDesc.textContent = `Parabéns! Você guiou a Lua Diferente em ${steps} passos. Pronto para o próximo desafio?`;
+      startBtn.textContent = `Avançar para Nível ${level + 1}`;
+      startBtn.onclick = nextLevel;
+      menuOverlay.style.display = 'flex';
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw maze walls & paths
+      for (let r = 0; r < gridRows; r++) {
+        for (let c = 0; c < gridCols; c++) {
+          if (maze[r][c] === 1) {
+            ctx.fillStyle = '#1e293b'; // Wall color
+            ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+            // Wall inner highlight
+            ctx.fillStyle = '#334155';
+            ctx.fillRect(c * tileSize + 2, r * tileSize + 2, tileSize - 4, tileSize - 4);
+          } else {
+            ctx.fillStyle = '#0f172a'; // Path floor
+            ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+          }
+        }
+      }
+
+      // Draw Goal (Star ⭐)
+      ctx.save();
+      ctx.translate(goal.x * tileSize + tileSize / 2, goal.y * tileSize + tileSize / 2);
+      ctx.font = `${Math.floor(tileSize * 0.7)}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('⭐', 0, 0);
+      ctx.restore();
+
+      // Draw Player (Lua Diferente 🌙)
+      ctx.save();
+      ctx.translate(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2);
+      if (imgLoaded) {
+        let size = tileSize * 0.85;
+        ctx.drawImage(luaImg, -size / 2, -size / 2, size, size);
+      } else {
+        // Fallback vector drawing of Lua Diferente (Crescent Moon with cute face)
+        ctx.font = `${Math.floor(tileSize * 0.8)}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🌙', 0, 0);
+      }
+      ctx.restore();
+    }
+
+    // Keyboard controls
+    window.addEventListener('keydown', (e) => {
+      if (!gameActive) return;
+      if (['ArrowUp', 'KeyW'].includes(e.code)) { movePlayer(0, -1); e.preventDefault(); }
+      if (['ArrowDown', 'KeyS'].includes(e.code)) { movePlayer(0, 1); e.preventDefault(); }
+      if (['ArrowLeft', 'KeyA'].includes(e.code)) { movePlayer(-1, 0); e.preventDefault(); }
+      if (['ArrowRight', 'KeyD'].includes(e.code)) { movePlayer(1, 0); e.preventDefault(); }
+    });
+
+    // Initial render preview
+    generateMaze();
+    draw();
+  </script>
+</body>
+</html>
