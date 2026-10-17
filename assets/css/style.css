@@ -658,6 +658,31 @@ footer.site-footer {
   color: var(--text-primary);
 }
 
+/* Google Translate Widget Integration */
+.goog-te-banner-frame.skiptranslate { display: none !important; }
+body { top: 0px !important; }
+.goog-te-gadget { font-size: 0px !important; color: transparent !important; }
+.goog-te-gadget .goog-te-combo {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition);
+}
+.goog-te-gadget .goog-te-combo:hover {
+  border-color: var(--accent-color);
+}
+.goog-logo-link, .goog-te-gadget span {
+  display: none !important;
+}
+.goog-tooltip { display: none !important; }
+.goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .hero-section {

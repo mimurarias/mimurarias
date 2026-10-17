@@ -25,14 +25,16 @@
         <ul class="nav-links">
           <li><a href="#apps">Aplicativos</a></li>
           <li><a href="#books">Livros</a></li>
-          <li><a href="#privacy">Políticas</a></li>
           <li><a href="#contact">Contato</a></li>
         </ul>
       </nav>
 
-      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar tema">
-        ☀️
-      </button>
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <div id="google_translate_element"></div>
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar tema">
+          ☀️
+        </button>
+      </div>
     </div>
   </header>
 
@@ -226,63 +228,7 @@
       </div>
     </section>
 
-    <!-- 4. Central de Políticas de Privacidade (Preservada para a Play Store) -->
-    <section id="privacy" class="privacy-hub">
-      <div class="privacy-hub-header">
-        <h2>🔒 Central de Políticas de Privacidade & Termos</h2>
-        <p>
-          Documentos e transparência de privacidade oficiais exigidos pelo Google Play para conformidade legal. Todas as rotas abaixo permanecem ativas e inalteradas.
-        </p>
-      </div>
 
-      <div class="privacy-grid">
-        <div class="privacy-item">
-          <div class="privacy-item-title">APK AppSec / Privacy Audit</div>
-          <div class="privacy-item-links">
-            <a href="apkappsec/privacy.html" class="privacy-link">Português (Brasil) →</a>
-            <a href="apkappsec/privacy-en.html" class="privacy-link">English →</a>
-          </div>
-        </div>
-
-        <div class="privacy-item">
-          <div class="privacy-item-title">Tic Tac Toe (Jogo da Velha)</div>
-          <div class="privacy-item-links">
-            <a href="tictactoe/privacy.html" class="privacy-link">Português (Brasil) →</a>
-            <a href="tictactoe/privacy-en.html" class="privacy-link">English →</a>
-          </div>
-        </div>
-
-        <div class="privacy-item">
-          <div class="privacy-item-title">Network Ping Test</div>
-          <div class="privacy-item-links">
-            <a href="pingtest/privacy.html" class="privacy-link">Política de Privacidade →</a>
-          </div>
-        </div>
-
-        <div class="privacy-item">
-          <div class="privacy-item-title">Lanterna SOS Strobe (Flashlight)</div>
-          <div class="privacy-item-links">
-            <a href="flashlight/privacy.html" class="privacy-link">Português (Brasil) →</a>
-            <a href="flashlight/privacy-en.html" class="privacy-link">English →</a>
-          </div>
-        </div>
-
-        <div class="privacy-item">
-          <div class="privacy-item-title">Geo Tools (Página Pública)</div>
-          <div class="privacy-item-links">
-            <a href="geotools/privacy.html" class="privacy-link">Português (Brasil) →</a>
-            <a href="geotools/privacy-en.html" class="privacy-link">English →</a>
-          </div>
-        </div>
-
-        <div class="privacy-item">
-          <div class="privacy-item-title">Google AdMob (app-ads.txt)</div>
-          <div class="privacy-item-links">
-            <a href="app-ads.txt" class="privacy-link">Ver app-ads.txt direto →</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
   </main>
 
@@ -321,5 +267,18 @@
 
   <!-- JS -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Google Translate Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'pt',
+        includedLanguages: 'en,es,pt',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
