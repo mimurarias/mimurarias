@@ -107,6 +107,8 @@
       box-shadow: inset 0 4px 8px rgba(0,0,0,0.4);
       display: block;
       touch-action: none;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
     }
 
     /* D-Pad On-Screen Controls for Mobile / Touch */
@@ -226,7 +228,7 @@
 
   <header>
     <h1>Labirinto da Lua Diferente 🌙🔥</h1>
-    <div class="subtitle">Desvie dos foguinhos e guie a Lua até a Estrela!</div>
+    <div class="subtitle">Dungeon de Pedra & Desafios Espaciais!</div>
   </header>
 
   <div class="game-container">
@@ -243,8 +245,8 @@
 
     <!-- Start / Win Screen Overlay -->
     <div id="menuOverlay" class="menu-overlay">
-      <h2 id="menuTitle">Labirinto Espacial Desafiador</h2>
-      <p id="menuDesc">Ajude a Lua Diferente a escapar do labirinto gigante desviando das chamas ardentes 🔥 até a estrela ⭐!</p>
+      <h2 id="menuTitle">Dungeon da Lua Diferente</h2>
+      <p id="menuDesc">Explore a masmorra de pedra, desvie das chamas ardentes 🔥 e alcance a estrela ⭐!</p>
       <button id="startBtn" class="btn" onclick="handleMainButton()">Jogar Agora</button>
     </div>
   </div>
@@ -274,7 +276,7 @@
 
     // Game variables
     let tileSize = 28;
-    let gridCols = 15; // Larger initial maze
+    let gridCols = 15;
     let gridRows = 15;
     let level = 1;
     let steps = 0;
@@ -283,7 +285,18 @@
     let player = { x: 1, y: 1 };
     let goal = { x: 13, y: 13 };
     let maze = [];
-    let fires = []; // Fire hazards array 🔥
+    let fires = [];
+
+    // Dungeon Tiles (Wall & Floor)
+    let wallImg = new Image();
+    let floorImg = new Image();
+    let tilesLoaded = 0;
+
+    wallImg.src = 'assets/wall.png';
+    floorImg.src = 'assets/floor.png';
+
+    wallImg.onload = () => { tilesLoaded++; };
+    floorImg.onload = () => { tilesLoaded++; };
 
     // 4-Directional Sprites for Lua Diferente
     let playerDir = 'front';
@@ -366,11 +379,10 @@
     }
 
     function initLevel() {
-      // Much larger and more complex grid as levels increase
-      gridCols = 13 + (level * 4); // Level 1 = 17x17, Level 2 = 21x21, Level 3 = 25x25...
+      gridCols = 13 + (level * 4);
       gridRows = 13 + (level * 4);
 
-      if (gridCols > 27) gridCols = 27; // Cap max size
+      if (gridCols > 27) gridCols = 27;
       if (gridRows > 27) gridRows = 27;
 
       tileSize = Math.floor(420 / gridCols);
@@ -381,7 +393,6 @@
       player = { x: 1, y: 1 };
       goal = { x: gridCols - 2, y: gridRows - 2 };
 
-      // Generate fire hazards 🔥 on path cells
       fires = [];
       let pathCells = [];
       for (let r = 0; r < gridRows; r++) {
@@ -392,7 +403,6 @@
         }
       }
       pathCells.sort(() => Math.random() - 0.5);
-      // More fires per level for high challenge
       let numFires = Math.min(pathCells.length, 3 + (level * 4));
       fires = pathCells.slice(0, numFires);
 
@@ -446,15 +456,12 @@
           steps++;
           stepsValEl.textContent = steps;
 
-          // Check if stepped on fire 🔥
           let hitFire = fires.some(f => f.x === player.x && f.y === player.y);
           if (hitFire) {
             playSound('hit');
-            // Penalty: reset player to start and add 10 steps penalty
             player = { x: 1, y: 1 };
             steps += 10;
             stepsValEl.textContent = steps;
-            // Visual alert flash
             canvas.style.boxShadow = '0 0 20px #ef4444';
             setTimeout(() => { canvas.style.boxShadow = 'inset 0 4px 8px rgba(0,0,0,0.4)'; }, 300);
           } else {
@@ -463,7 +470,6 @@
 
           draw();
 
-          // Check win condition
           if (player.x === goal.x && player.y === goal.y) {
             gameActive = false;
             playSound('win');
@@ -475,7 +481,7 @@
 
     function showWinScreen() {
       menuTitle.textContent = `Nível ${level} Concluído! 🎉`;
-      menuDesc.textContent = `Incrível! Você desviou das chamas e guiou a Lua em ${steps} passos.`;
+      menuDesc.textContent = `Incrível! Você explorou a dungeon em ${steps} passos.`;
       startBtn.textContent = `Avançar para Nível ${level + 1}`;
       menuOverlay.style.display = 'flex';
     }
@@ -483,17 +489,23 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw maze walls & paths
+      // Draw Dungeon Walls & Floors using uploaded tiles
       for (let r = 0; r < gridRows; r++) {
         for (let c = 0; c < gridCols; c++) {
           if (maze[r][c] === 1) {
-            ctx.fillStyle = '#1e293b';
-            ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
-            ctx.fillStyle = '#334155';
-            ctx.fillRect(c * tileSize + 2, r * tileSize + 2, tileSize - 4, tileSize - 4);
+            if (tilesLoaded >= 2 && wallImg.complete) {
+              ctx.drawImage(wallImg, c * tileSize, r * tileSize, tileSize, tileSize);
+            } else {
+              ctx.fillStyle = '#1e293b';
+              ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+            }
           } else {
-            ctx.fillStyle = '#0f172a';
-            ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+            if (tilesLoaded >= 2 && floorImg.complete) {
+              ctx.drawImage(floorImg, c * tileSize, r * tileSize, tileSize, tileSize);
+            } else {
+              ctx.fillStyle = '#0f172a';
+              ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+            }
           }
         }
       }
@@ -541,6 +553,10 @@
       if (['ArrowDown', 'KeyS'].includes(e.code)) { movePlayer(0, 1); e.preventDefault(); }
       if (['ArrowLeft', 'KeyA'].includes(e.code)) { movePlayer(-1, 0); e.preventDefault(); }
       if (['ArrowRight', 'KeyD'].includes(e.code)) { movePlayer(1, 0); e.preventDefault(); }
+      if (['Space', 'Enter'].includes(e.code) && menuOverlay.style.display === 'flex') {
+        handleMainButton();
+        e.preventDefault();
+      }
     });
 
     // Initial render preview
