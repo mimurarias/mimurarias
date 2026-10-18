@@ -90,9 +90,9 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
-      max-width: 420px;
+      max-width: 520px;
       margin-bottom: 0.75rem;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-secondary);
     }
@@ -112,9 +112,9 @@
     /* D-Pad On-Screen Controls for Mobile / Touch */
     .controls {
       display: grid;
-      grid-template-columns: repeat(3, 60px);
-      grid-template-rows: repeat(2, 60px);
-      gap: 10px;
+      grid-template-columns: repeat(3, 65px);
+      grid-template-rows: repeat(2, 65px);
+      gap: 12px;
       margin-top: 1rem;
       justify-content: center;
       z-index: 1;
@@ -125,7 +125,7 @@
       border: 1px solid rgba(99, 102, 241, 0.4);
       border-radius: 50%;
       color: var(--text-primary);
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -235,7 +235,8 @@
       <div>Passos: <span id="steps-val">0</span></div>
     </div>
 
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <!-- Larger Canvas for bigger map & squares -->
+    <canvas id="gameCanvas" width="520" height="520"></canvas>
 
     <div class="desktop-hint" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.75rem; text-align: center;">
       Use as <b>Setas do Teclado</b> ou <b>WASD</b> para mover. Cuidado com o fogo 🔥!
@@ -272,16 +273,16 @@
     const menuDesc = document.getElementById('menuDesc');
     const startBtn = document.getElementById('startBtn');
 
-    // Game variables
-    let tileSize = 28;
-    let gridCols = 15;
-    let gridRows = 15;
+    // Game variables - Larger map and big squares
+    let tileSize = 40;
+    let gridCols = 13; // Perfect balanced size with large squares
+    let gridRows = 13;
     let level = 1;
     let steps = 0;
     let gameActive = false;
 
     let player = { x: 1, y: 1 };
-    let goal = { x: 13, y: 13 };
+    let goal = { x: 11, y: 11 };
     let maze = [];
     let fires = [];
 
@@ -396,13 +397,14 @@
     }
 
     function initLevel() {
-      gridCols = 13 + (level * 4);
-      gridRows = 13 + (level * 4);
+      // Larger map dimensions with big squares (Canvas width=520)
+      gridCols = 11 + (level * 2); // Level 1 = 13x13, Level 2 = 15x15, Level 3 = 17x17...
+      gridRows = 11 + (level * 2);
 
-      if (gridCols > 27) gridCols = 27;
-      if (gridRows > 27) gridRows = 27;
+      if (gridCols > 21) gridCols = 21;
+      if (gridRows > 21) gridRows = 21;
 
-      tileSize = Math.floor(420 / gridCols);
+      tileSize = Math.floor(520 / gridCols);
       canvas.width = gridCols * tileSize;
       canvas.height = gridRows * tileSize;
 
@@ -423,7 +425,7 @@
           }
         }
         pathCells.sort(() => Math.random() - 0.5);
-        let numFires = Math.min(pathCells.length, 2 + (level * 3));
+        let numFires = Math.min(pathCells.length, 2 + (level * 2));
         fires = pathCells.slice(0, numFires);
         attempts++;
       } while (!isSolvable() && attempts < 100);
@@ -511,7 +513,7 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw gorgeous polished vector walls & paths
+      // Draw gorgeous polished vector walls & paths with large squares
       for (let r = 0; r < gridRows; r++) {
         for (let c = 0; c < gridCols; c++) {
           let x = c * tileSize;
@@ -520,21 +522,21 @@
             ctx.fillStyle = '#1e293b';
             ctx.fillRect(x, y, tileSize, tileSize);
             ctx.fillStyle = '#334155';
-            ctx.fillRect(x + 1, y + 1, tileSize - 2, tileSize - 2);
+            ctx.fillRect(x + 2, y + 2, tileSize - 4, tileSize - 4);
           } else {
             ctx.fillStyle = '#0f172a';
             ctx.fillRect(x, y, tileSize, tileSize);
             ctx.fillStyle = '#1e293b';
-            ctx.fillRect(x + tileSize / 2 - 1, y + tileSize / 2 - 1, 2, 2);
+            ctx.fillRect(x + tileSize / 2 - 1.5, y + tileSize / 2 - 1.5, 3, 3);
           }
         }
       }
 
-      // Draw Fires 🔥
+      // Draw Fires 🔥 (Large and clear)
       fires.forEach(f => {
         ctx.save();
         ctx.translate(f.x * tileSize + tileSize / 2, f.y * tileSize + tileSize / 2);
-        ctx.font = `${Math.floor(tileSize * 0.75)}px sans-serif`;
+        ctx.font = `${Math.floor(tileSize * 0.85)}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('🔥', 0, 0);
@@ -544,21 +546,21 @@
       // Draw Goal (Star ⭐)
       ctx.save();
       ctx.translate(goal.x * tileSize + tileSize / 2, goal.y * tileSize + tileSize / 2);
-      ctx.font = `${Math.floor(tileSize * 0.75)}px sans-serif`;
+      ctx.font = `${Math.floor(tileSize * 0.85)}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('⭐', 0, 0);
       ctx.restore();
 
-      // Draw Player Sprite (Lua Diferente 🌙) - Made much larger (~1.8x tileSize)
+      // Draw Player Sprite (Lua Diferente 🌙) - MASSIVE (~2.4x tileSize)
       ctx.save();
       ctx.translate(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2);
       let currentImg = spriteImages[playerDir];
       if (spritesLoaded >= 4 && currentImg.complete) {
-        let size = tileSize * 1.8; // Increased size as requested
+        let size = tileSize * 2.4; // Huge character size!
         ctx.drawImage(currentImg, -size / 2, -size / 2, size, size);
       } else {
-        ctx.font = `${Math.floor(tileSize * 1.6)}px sans-serif`;
+        ctx.font = `${Math.floor(tileSize * 2.0)}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('🌙', 0, 0);
