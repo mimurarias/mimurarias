@@ -274,21 +274,34 @@
 
     // Game variables
     let tileSize = 30;
-    let gridCols = 11; // Must be odd
-    let gridRows = 11; // Must be odd
+    let gridCols = 11;
+    let gridRows = 11;
     let level = 1;
     let steps = 0;
     let gameActive = false;
 
     let player = { x: 1, y: 1 };
     let goal = { x: 9, y: 9 };
-    let maze = []; // 1 for wall, 0 for path
+    let maze = [];
 
-    // Optional custom image for Lua Diferente (if user adds assets/lua-diferente.png later)
-    let luaImg = new Image();
-    let imgLoaded = false;
-    luaImg.src = '../../assets/images/luadiferente-icon.png';
-    luaImg.onload = () => { imgLoaded = true; };
+    // 4-Directional Sprites for Lua Diferente
+    let playerDir = 'front'; // 'front', 'back', 'left', 'right'
+    let spriteImages = {
+      front: new Image(),
+      back: new Image(),
+      left: new Image(),
+      right: new Image()
+    };
+    let spritesLoaded = 0;
+
+    spriteImages.front.src = 'assets/lua_front.png';
+    spriteImages.back.src = 'assets/lua_back.png';
+    spriteImages.left.src = 'assets/lua_left.png';
+    spriteImages.right.src = 'assets/lua_right.png';
+
+    Object.values(spriteImages).forEach(img => {
+      img.onload = () => { spritesLoaded++; };
+    });
 
     // Audio context for procedural sound effects
     let audioCtx = null;
@@ -317,17 +330,17 @@
           osc.stop(now + 0.05);
         } else if (type === 'win') {
           osc.type = 'triangle';
-          osc.frequency.setValueAtTime(523.25, now); // C5
-          osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
-          osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
-          osc.frequency.setValueAtTime(1046.50, now + 0.3); // C6
+          osc.frequency.setValueAtTime(523.25, now);
+          osc.frequency.setValueAtTime(659.25, now + 0.1);
+          osc.frequency.setValueAtTime(783.99, now + 0.2);
+          osc.frequency.setValueAtTime(1046.50, now + 0.3);
           gain.gain.setValueAtTime(0.15, now);
           gain.gain.linearRampToValueAtTime(0.01, now + 0.6);
           osc.start(now);
           osc.stop(now + 0.6);
         }
       } catch (e) {
-        // Ignore audio errors if blocked
+        // Ignore audio errors
       }
     }
 
@@ -346,11 +359,9 @@
     }
 
     function initLevel() {
-      // Adjust maze size based on level
-      gridCols = 9 + (level * 2); // 11, 13, 15, 17...
+      gridCols = 9 + (level * 2);
       gridRows = 9 + (level * 2);
 
-      // Cap max size to fit canvas nicely
       if (gridCols > 17) gridCols = 17;
       if (gridRows > 17) gridRows = 17;
 
@@ -367,7 +378,6 @@
       draw();
     }
 
-    // Generate maze using Recursive Backtracker algorithm
     function generateMaze() {
       maze = Array(gridRows).fill(0).map(() => Array(gridCols).fill(1));
 
@@ -391,13 +401,18 @@
       }
 
       carve(1, 1);
-      // Ensure start and goal are open paths
       maze[1][1] = 0;
       maze[gridRows - 2][gridCols - 2] = 0;
     }
 
     function movePlayer(dx, dy) {
       if (!gameActive) return;
+
+      // Update direction based on movement
+      if (dx === 1) playerDir = 'right';
+      else if (dx === -1) playerDir = 'left';
+      else if (dy === 1) playerDir = 'front';
+      else if (dy === -1) playerDir = 'back';
 
       let newX = player.x + dx;
       let newY = player.y + dy;
@@ -411,7 +426,6 @@
           playSound('move');
           draw();
 
-          // Check win condition
           if (player.x === goal.x && player.y === goal.y) {
             gameActive = false;
             playSound('win');
@@ -436,13 +450,12 @@
       for (let r = 0; r < gridRows; r++) {
         for (let c = 0; c < gridCols; c++) {
           if (maze[r][c] === 1) {
-            ctx.fillStyle = '#1e293b'; // Wall color
+            ctx.fillStyle = '#1e293b';
             ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
-            // Wall inner highlight
             ctx.fillStyle = '#334155';
             ctx.fillRect(c * tileSize + 2, r * tileSize + 2, tileSize - 4, tileSize - 4);
           } else {
-            ctx.fillStyle = '#0f172a'; // Path floor
+            ctx.fillStyle = '#0f172a';
             ctx.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
           }
         }
@@ -457,14 +470,14 @@
       ctx.fillText('⭐', 0, 0);
       ctx.restore();
 
-      // Draw Player (Lua Diferente 🌙)
+      // Draw Player Sprite (Lua Diferente 🌙)
       ctx.save();
       ctx.translate(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2);
-      if (imgLoaded) {
-        let size = tileSize * 0.85;
-        ctx.drawImage(luaImg, -size / 2, -size / 2, size, size);
+      let currentImg = spriteImages[playerDir];
+      if (spritesLoaded >= 4 && currentImg.complete) {
+        let size = tileSize * 0.95;
+        ctx.drawImage(currentImg, -size / 2, -size / 2, size, size);
       } else {
-        // Fallback vector drawing of Lua Diferente (Crescent Moon with cute face)
         ctx.font = `${Math.floor(tileSize * 0.8)}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
