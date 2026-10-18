@@ -226,7 +226,7 @@
 
   <header>
     <h1>Labirinto da Lua Diferente 🌙🔥</h1>
-    <div class="subtitle">Labirinto Espacial & Desafios de Fogo!</div>
+    <div class="subtitle">Labirinto da Lua Diferente!</div>
   </header>
 
   <div class="game-container">
@@ -586,7 +586,7 @@
       ctx.translate(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2);
       let currentImg = spriteImages[playerDir];
       if (spritesLoaded >= 4 && currentImg.complete) {
-        let size = tileSize * 2.2;
+        let size = tileSize * 1.6;
         ctx.drawImage(currentImg, -size / 2, -size / 2, size, size);
       } else {
         ctx.font = `${Math.floor(tileSize * 2.0)}px sans-serif`;
