@@ -365,6 +365,36 @@
       gameActive = true;
     }
 
+    // Validate that a guaranteed solvable path exists from start to goal avoiding fires
+    function isSolvable() {
+      let queue = [{x: 1, y: 1}];
+      let visited = Array(gridRows).fill(0).map(() => Array(gridCols).fill(false));
+      visited[1][1] = true;
+      let fireSet = new Set(fires.map(f => `${f.x},${f.y}`));
+
+      while (queue.length > 0) {
+        let curr = queue.shift();
+        if (curr.x === goal.x && curr.y === goal.y) {
+          return true;
+        }
+        let neighbors = [
+          {x: curr.x, y: curr.y - 1},
+          {x: curr.x, y: curr.y + 1},
+          {x: curr.x - 1, y: curr.y},
+          {x: curr.x + 1, y: curr.y}
+        ];
+        for (let n of neighbors) {
+          if (n.x >= 0 && n.x < gridCols && n.y >= 0 && n.y < gridRows) {
+            if (maze[n.y][n.x] === 0 && !visited[n.y][n.x] && !fireSet.has(`${n.x},${n.y}`)) {
+              visited[n.y][n.x] = true;
+              queue.push(n);
+            }
+          }
+        }
+      }
+      return false;
+    }
+
     function initLevel() {
       gridCols = 13 + (level * 4);
       gridRows = 13 + (level * 4);
@@ -380,18 +410,23 @@
       player = { x: 1, y: 1 };
       goal = { x: gridCols - 2, y: gridRows - 2 };
 
-      fires = [];
-      let pathCells = [];
-      for (let r = 0; r < gridRows; r++) {
-        for (let c = 0; c < gridCols; c++) {
-          if (maze[r][c] === 0 && !(r === 1 && c === 1) && !(r === gridRows - 2 && c === gridCols - 2)) {
-            pathCells.push({ x: c, y: r });
+      // Ensure 100% solvability by checking path with BFS
+      let attempts = 0;
+      do {
+        fires = [];
+        let pathCells = [];
+        for (let r = 0; r < gridRows; r++) {
+          for (let c = 0; c < gridCols; c++) {
+            if (maze[r][c] === 0 && !(r === 1 && c === 1) && !(r === gridRows - 2 && c === gridCols - 2)) {
+              pathCells.push({ x: c, y: r });
+            }
           }
         }
-      }
-      pathCells.sort(() => Math.random() - 0.5);
-      let numFires = Math.min(pathCells.length, 3 + (level * 4));
-      fires = pathCells.slice(0, numFires);
+        pathCells.sort(() => Math.random() - 0.5);
+        let numFires = Math.min(pathCells.length, 2 + (level * 3));
+        fires = pathCells.slice(0, numFires);
+        attempts++;
+      } while (!isSolvable() && attempts < 100);
 
       levelValEl.textContent = level;
       stepsValEl.textContent = steps;
@@ -476,22 +511,19 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw gorgeous polished vector walls & paths matching portfólio theme
+      // Draw gorgeous polished vector walls & paths
       for (let r = 0; r < gridRows; r++) {
         for (let c = 0; c < gridCols; c++) {
           let x = c * tileSize;
           let y = r * tileSize;
           if (maze[r][c] === 1) {
-            // Wall - Sleek rounded/gradient modern tile
             ctx.fillStyle = '#1e293b';
             ctx.fillRect(x, y, tileSize, tileSize);
             ctx.fillStyle = '#334155';
             ctx.fillRect(x + 1, y + 1, tileSize - 2, tileSize - 2);
           } else {
-            // Path floor - Clean dark space floor
             ctx.fillStyle = '#0f172a';
             ctx.fillRect(x, y, tileSize, tileSize);
-            // Subtle dot on floor
             ctx.fillStyle = '#1e293b';
             ctx.fillRect(x + tileSize / 2 - 1, y + tileSize / 2 - 1, 2, 2);
           }
@@ -518,15 +550,15 @@
       ctx.fillText('⭐', 0, 0);
       ctx.restore();
 
-      // Draw Player Sprite (Lua Diferente 🌙)
+      // Draw Player Sprite (Lua Diferente 🌙) - Made much larger (~1.8x tileSize)
       ctx.save();
       ctx.translate(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2);
       let currentImg = spriteImages[playerDir];
       if (spritesLoaded >= 4 && currentImg.complete) {
-        let size = tileSize * 0.95;
+        let size = tileSize * 1.8; // Increased size as requested
         ctx.drawImage(currentImg, -size / 2, -size / 2, size, size);
       } else {
-        ctx.font = `${Math.floor(tileSize * 0.8)}px sans-serif`;
+        ctx.font = `${Math.floor(tileSize * 1.6)}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('🌙', 0, 0);
