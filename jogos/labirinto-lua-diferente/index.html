@@ -59,7 +59,7 @@
     }
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 800;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
@@ -68,8 +68,19 @@
     }
 
     .subtitle {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-secondary);
+    }
+
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
+      gap: 1rem;
+      z-index: 1;
     }
 
     .game-container {
@@ -77,9 +88,8 @@
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 0.85rem;
+      padding: 0.75rem;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -91,9 +101,8 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      max-width: 520px;
       margin-bottom: 0.5rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-secondary);
     }
@@ -102,19 +111,27 @@
       color: var(--text-primary);
     }
 
-    .btn-reset-small {
-      background: rgba(99, 102, 241, 0.2);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: var(--text-primary);
-      padding: 0.25rem 0.65rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
+    .action-btns {
+      display: flex;
+      gap: 0.5rem;
     }
 
-    .btn-reset-small:hover {
-      background: rgba(99, 102, 241, 0.4);
+    .icon-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 8px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: background 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     canvas {
@@ -123,22 +140,26 @@
       box-shadow: inset 0 4px 12px rgba(0,0,0,0.6);
       display: block;
       touch-action: none;
+      max-width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
     }
 
-    /* Controls for Mobile / Touch */
+    /* D-Pad On-Screen Controls for Mobile / Touch */
     .controls {
       display: grid;
       grid-template-columns: repeat(3, 60px);
       grid-template-rows: repeat(2, 60px);
       gap: 10px;
-      margin-top: 0.75rem;
       justify-content: center;
+      align-items: center;
       z-index: 1;
+      margin-top: 0.5rem;
     }
 
     .ctrl-btn {
-      background: rgba(99, 102, 241, 0.2);
-      border: 1px solid rgba(99, 102, 241, 0.4);
+      background: rgba(99, 102, 241, 0.25);
+      border: 1px solid rgba(99, 102, 241, 0.5);
       border-radius: 50%;
       color: var(--text-primary);
       font-size: 1.4rem;
@@ -146,8 +167,11 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.15s ease;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transition: all 0.12s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      width: 60px;
+      height: 600px;
+      max-height: 60px;
     }
 
     .ctrl-btn:active, .ctrl-btn.pressed {
@@ -179,7 +203,7 @@
     }
 
     .menu-overlay h2 {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       margin-bottom: 0.5rem;
       color: var(--text-primary);
     }
@@ -188,8 +212,8 @@
       font-size: 0.9rem;
       color: var(--text-secondary);
       margin-bottom: 1.25rem;
-      max-width: 300px;
-      line-height: 1.5;
+      max-width: 280px;
+      line-height: 1.4;
     }
 
     .btn {
@@ -218,15 +242,48 @@
       text-align: center;
     }
 
-    @media (min-width: 768px) {
-      .controls {
-        display: none;
+    .footer-note a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    /* Layout Ajustável para Telas Horizontais (Landscape Mobile & Desktop) */
+    @media (min-aspect-ratio: 1/1) and (max-height: 600px) {
+      body {
+        padding: 0.25rem;
       }
+      header {
+        margin-bottom: 0.1rem;
+      }
+      h1 { font-size: 1.1rem; }
+      .subtitle { display: none; }
+      .main-wrapper {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      canvas {
+        max-height: 75vh;
+      }
+      .controls {
+        margin-top: 0;
+        grid-template-columns: repeat(3, 50px);
+        grid-template-rows: repeat(2, 50px);
+        gap: 8px;
+      }
+      .ctrl-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
       .desktop-hint {
         display: block;
       }
     }
-    @media (max-width: 767px) {
+    @media (max-width: 1023px) {
       .desktop-hint {
         display: none;
       }
@@ -235,466 +292,444 @@
 </head>
 <body>
 
-  <header>
-    <h1>Labirinto da Lua Diferente 🌙🔥</h1>
-    <div class="subtitle">Desafios Infinitos 100% Solucionáveis!</div>
-  </header>
+<header>
+  <h1>Labirinto da Lua Diferente 🌙🔥</h1>
+  <div class="subtitle">Desvie do fogo e encontre a joia do espaço!</div>
+</header>
 
+<div class="main-wrapper">
   <div class="game-container">
     <div class="game-stats">
       <div>Nível: <span id="level-val">1</span></div>
       <div>Passos: <span id="steps-val">0</span></div>
-      <button class="btn-reset-small" onclick="restartLevel()" title="Reiniciar nível atual (Atalho: R)">🔄 Reiniciar (R)</button>
+      <div class="action-btns">
+        <button class="icon-btn" onclick="restartLevel()" title="Reiniciar Nível">🔄 Reset</button>
+        <button id="musicToggleBtn" class="icon-btn" onclick="toggleAudio()" title="Música On/Off">🔊 Som</button>
+      </div>
     </div>
 
-    <!-- Canvas para renderização do jogo -->
-    <canvas id="gameCanvas" width="500" height="500"></canvas>
+    <!-- Canvas do jogo -->
+    <canvas id="gameCanvas" width="520" height="520"></canvas>
 
     <div class="desktop-hint" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem; text-align: center;">
-      Use <b>Setas do Teclado</b> ou <b>WASD</b>. Pressione <b>R</b> para reiniciar o nível.
+      Use as <b>Setas do Teclado</b> ou <b>WASD</b>. Pressione <b>R</b> para reiniciar. Cuidado com o fogo 🔥!
     </div>
 
-    <!-- Start / Win Screen Overlay -->
+    <!-- Tela Inicial / Vitória -->
     <div id="menuOverlay" class="menu-overlay">
       <h2 id="menuTitle">Labirinto da Lua Diferente</h2>
-      <p id="menuDesc">Guie a Lua Diferente pelo labirinto infinito! O caminho até o diamante 💎 sempre estará garantido e livre de fogo 🔥.</p>
+      <p id="menuDesc">Guie a Lua Diferente pelo labirinto, desvie das chamas ardentes 🔥 e alcance a estrela brilhante 💎!</p>
       <button id="startBtn" class="btn" onclick="handleMainButton()">Jogar Agora</button>
     </div>
   </div>
 
-  <!-- Controles Touch (D-Pad) -->
+  <!-- D-Pad On-Screen Controls para Celular -->
   <div class="controls">
     <button class="ctrl-btn ctrl-up" ontouchstart="movePlayer(0, -1); event.preventDefault();" onclick="movePlayer(0, -1)">⬆️</button>
     <button class="ctrl-btn ctrl-left" ontouchstart="movePlayer(-1, 0); event.preventDefault();" onclick="movePlayer(-1, 0)">⬅️</button>
     <button class="ctrl-btn ctrl-down" ontouchstart="movePlayer(0, 1); event.preventDefault();" onclick="movePlayer(0, 1)">⬇️</button>
     <button class="ctrl-btn ctrl-right" ontouchstart="movePlayer(1, 0); event.preventDefault();" onclick="movePlayer(1, 0)">➡</button>
   </div>
+</div>
 
-  <div class="footer-note">
-    Mimurarias &bull; Labirinto Infinito da Lua Diferente
-  </div>
+<div class="footer-note">
+  Mimurarias &bull; <a href="../../index.html">Voltar ao Portfólio</a>
+</div>
 
-  <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
+<!-- Elemento de Áudio de Fundo -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="jogos/labirinto-lua-diferente/assets/lua-diferente.mp3" type="audio/mpeg">
+</audio>
 
-    const levelValEl = document.getElementById('level-val');
-    const stepsValEl = document.getElementById('steps-val');
-    const menuOverlay = document.getElementById('menuOverlay');
-    const menuTitle = document.getElementById('menuTitle');
-    const menuDesc = document.getElementById('menuDesc');
-    const startBtn = document.getElementById('startBtn');
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
 
-    // Configurações do jogo
-    let tileSize = 40;
-    let gridCols = 13;
-    let gridRows = 13;
-    let level = 1;
-    let steps = 0;
-    let gameActive = false;
+  const levelValEl = document.getElementById('level-val');
+  const stepsValEl = document.getElementById('steps-val');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuTitle = document.getElementById('menuTitle');
+  const menuDesc = document.getElementById('menuDesc');
+  const startBtn = document.getElementById('startBtn');
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggleBtn = document.getElementById('musicToggleBtn');
 
-    let player = { x: 1, y: 1 };
-    let goal = { x: 11, y: 11 };
-    let maze = [];
-    let fires = [];
+  let audioMuted = false;
 
-    // Sprites direcionais
-    let playerDir = 'front';
-    let spriteImages = {
-      front: new Image(),
-      back: new Image(),
-      left: new Image(),
-      right: new Image()
-    };
-    let spritesLoaded = 0;
+  // Game variables
+  let tileSize = 40;
+  let gridCols = 11;
+  let gridRows = 11;
+  let level = 1;
+  let steps = 0;
+  let gameActive = false;
 
-    spriteImages.front.src = 'assets/lua_front.png';
-    spriteImages.back.src = 'assets/lua_back.png';
-    spriteImages.left.src = 'assets/lua_left.png';
-    spriteImages.right.src = 'assets/lua_right.png';
+  let player = { x: 1, y: 1 };
+  let goal = { x: 9, y: 9 };
+  let maze = [];
+  let fires = [];
 
-    Object.values(spriteImages).forEach(img => {
-      img.onload = () => { spritesLoaded++; draw(); };
-      img.onerror = () => { /* Renderização fallback com emoji em caso de erro de imagem */ };
-    });
+  // Sprites 4-Direcionais da Lua Diferente
+  let playerDir = 'front';
+  let spriteImages = {
+    front: new Image(),
+    back: new Image(),
+    left: new Image(),
+    right: new Image()
+  };
+  let spritesLoaded = 0;
 
-    // Efeitos sonoros sintéticos via Web Audio API
-    let audioCtx = null;
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  spriteImages.front.src = 'assets/lua_front.png';
+  spriteImages.back.src = 'assets/lua_back.png';
+  spriteImages.left.src = 'assets/lua_left.png';
+  spriteImages.right.src = 'assets/lua_right.png';
+
+  Object.values(spriteImages).forEach(img => {
+    img.onload = () => { spritesLoaded++; draw(); };
+  });
+
+  // Web Audio para efeitos sonoros de movimento e acerto
+  let audioCtx = null;
+  function initAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  }
+
+  function toggleAudio() {
+    audioMuted = !audioMuted;
+    if (audioMuted) {
+      bgMusic.pause();
+      musicToggleBtn.textContent = '🔇 Off';
+    } else {
+      if (gameActive) bgMusic.play().catch(() => {});
+      musicToggleBtn.textContent = '🔊 Som';
+    }
+  }
+
+  function playBgMusic() {
+    if (!audioMuted) {
+      bgMusic.play().catch(e => console.log("Aguardando interação do usuário para reproduzir áudio"));
+    }
+  }
+
+  function playSoundEffect(type) {
+    if (audioMuted) return;
+    try {
+      initAudioContext();
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      const now = audioCtx.currentTime;
+      if (type === 'move') {
+        osc.frequency.setValueAtTime(440, now);
+        osc.frequency.exponentialRampToValueAtTime(220, now + 0.05);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } else if (type === 'hit') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.linearRampToValueAtTime(80, now + 0.2);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } else if (type === 'win') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.1);
+        osc.frequency.setValueAtTime(783.99, now + 0.2);
+        osc.frequency.setValueAtTime(1046.50, now + 0.3);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.6);
+        osc.start(now);
+        osc.stop(now + 0.6);
       }
+    } catch (e) {
+      // Ignora erros no áudio
     }
+  }
 
-    function playSound(type) {
-      try {
-        initAudio();
-        if (!audioCtx) return;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
+  function handleMainButton() {
+    menuOverlay.style.display = 'none';
+    playBgMusic();
 
-        const now = audioCtx.currentTime;
-        if (type === 'move') {
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.exponentialRampToValueAtTime(220, now + 0.05);
-          gain.gain.setValueAtTime(0.06, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
-          osc.start(now);
-          osc.stop(now + 0.05);
-        } else if (type === 'hit') {
-          osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(200, now);
-          osc.frequency.linearRampToValueAtTime(70, now + 0.2);
-          gain.gain.setValueAtTime(0.18, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
-          osc.start(now);
-          osc.stop(now + 0.2);
-        } else if (type === 'win') {
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(523.25, now);
-          osc.frequency.setValueAtTime(659.25, now + 0.1);
-          osc.frequency.setValueAtTime(783.99, now + 0.2);
-          osc.frequency.setValueAtTime(1046.50, now + 0.3);
-          gain.gain.setValueAtTime(0.15, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.5);
-          osc.start(now);
-          osc.stop(now + 0.5);
-        }
-      } catch (e) {
-        // Trata ambientes sem áudio ativado
+    if (menuTitle.textContent.includes('Concluído')) {
+      level++;
+    } else {
+      level = 1;
+      steps = 0;
+    }
+    initLevel();
+    gameActive = true;
+  }
+
+  function restartLevel() {
+    player = { x: 1, y: 1 };
+    steps += 5; // Pequena penalidade de passos por restart
+    stepsValEl.textContent = steps;
+    draw();
+  }
+
+  // Busca BFS para calcular o caminho mais curto
+  function getShortestPath(start, target, customFires = []) {
+    let queue = [[start]];
+    let visited = Array(gridRows).fill(0).map(() => Array(gridCols).fill(false));
+    visited[start.y][start.x] = true;
+    let fireSet = new Set(customFires.map(f => `${f.x},${f.y}`));
+
+    while (queue.length > 0) {
+      let path = queue.shift();
+      let curr = path[path.length - 1];
+
+      if (curr.x === target.x && curr.y === target.y) {
+        return path;
       }
-    }
 
-    function handleMainButton() {
-      menuOverlay.style.display = 'none';
-      if (menuTitle.textContent.includes('Concluído')) {
-        level++;
-      } else {
-        level = 1;
-        steps = 0;
-      }
-      initLevel();
-      gameActive = true;
-    }
+      let neighbors = [
+        {x: curr.x, y: curr.y - 1},
+        {x: curr.x, y: curr.y + 1},
+        {x: curr.x - 1, y: curr.y},
+        {x: curr.x + 1, y: curr.y}
+      ];
 
-    function restartLevel() {
-      if (!gameActive && menuOverlay.style.display !== 'none') return;
-      player = { x: 1, y: 1 };
-      playerDir = 'front';
-      gameActive = true;
-      draw();
-    }
-
-    // Busca BFS para encontrar o caminho crítico garantido do início ao destino
-    function getCriticalPath(startX, startY, targetX, targetY) {
-      let queue = [{ x: startX, y: startY, path: [{ x: startX, y: startY }] }];
-      let visited = Array(gridRows).fill(0).map(() => Array(gridCols).fill(false));
-      visited[startY][startX] = true;
-
-      while (queue.length > 0) {
-        let curr = queue.shift();
-        if (curr.x === targetX && curr.y === targetY) {
-          return curr.path;
-        }
-
-        let neighbors = [
-          { x: curr.x, y: curr.y - 1 },
-          { x: curr.x, y: curr.y + 1 },
-          { x: curr.x - 1, y: curr.y },
-          { x: curr.x + 1, y: curr.y }
-        ];
-
-        for (let n of neighbors) {
-          if (n.x >= 0 && n.x < gridCols && n.y >= 0 && n.y < gridRows) {
-            if (maze[n.y][n.x] === 0 && !visited[n.y][n.x]) {
-              visited[n.y][n.x] = true;
-              queue.push({
-                x: n.x,
-                y: n.y,
-                path: [...curr.path, { x: n.x, y: n.y }]
-              });
-            }
+      for (let n of neighbors) {
+        if (n.x >= 0 && n.x < gridCols && n.y >= 0 && n.y < gridRows) {
+          if (maze[n.y][n.x] === 0 && !visited[n.y][n.x] && !fireSet.has(`${n.x},${n.y}`)) {
+            visited[n.y][n.x] = true;
+            queue.push([...path, n]);
           }
         }
       }
-      return null;
+    }
+    return null;
+  }
+
+  function generateMaze() {
+    maze = Array(gridRows).fill(0).map(() => Array(gridCols).fill(1));
+
+    function carve(x, y) {
+      maze[y][x] = 0;
+      const dirs = [
+        {dx: 0, dy: -2},
+        {dx: 0, dy: 2},
+        {dx: -2, dy: 0},
+        {dx: 2, dy: 0}
+      ].sort(() => Math.random() - 0.5);
+
+      for (let d of dirs) {
+        let nx = x + d.dx;
+        let ny = y + d.dy;
+        if (nx > 0 && nx < gridCols - 1 && ny > 0 && ny < gridRows - 1 && maze[ny][nx] === 1) {
+          maze[y + d.dy / 2][x + d.dx / 2] = 0;
+          carve(nx, ny);
+        }
+      }
     }
 
-    // Valida se o mapa é perfeitamente solutável evitando chamas
-    function isSolvableWithFires() {
-      let fireSet = new Set(fires.map(f => `${f.x},${f.y}`));
-      let queue = [{ x: player.x, y: player.y }];
-      let visited = Array(gridRows).fill(0).map(() => Array(gridCols).fill(false));
-      visited[player.y][player.x] = true;
+    carve(1, 1);
+    maze[1][1] = 0;
 
-      while (queue.length > 0) {
-        let curr = queue.shift();
-        if (curr.x === goal.x && curr.y === goal.y) {
-          return true;
-        }
+    // Encontra a célula mais distante acessível para ser a meta
+    let reachable = [];
+    let queue = [{x: 1, y: 1, dist: 0}];
+    let visited = Array(gridRows).fill(0).map(() => Array(gridCols).fill(false));
+    visited[1][1] = true;
 
-        let neighbors = [
-          { x: curr.x, y: curr.y - 1 },
-          { x: curr.x, y: curr.y + 1 },
-          { x: curr.x - 1, y: curr.y },
-          { x: curr.x + 1, y: curr.y }
-        ];
+    while (queue.length > 0) {
+      let curr = queue.shift();
+      reachable.push(curr);
 
-        for (let n of neighbors) {
-          if (n.x >= 0 && n.x < gridCols && n.y >= 0 && n.y < gridRows) {
-            if (maze[n.y][n.x] === 0 && !visited[n.y][n.x] && !fireSet.has(`${n.x},${n.y}`)) {
-              visited[n.y][n.x] = true;
-              queue.push(n);
-            }
+      let neighbors = [
+        {x: curr.x, y: curr.y - 1},
+        {x: curr.x, y: curr.y + 1},
+        {x: curr.x - 1, y: curr.y},
+        {x: curr.x + 1, y: curr.y}
+      ];
+      for (let n of neighbors) {
+        if (n.x > 0 && n.x < gridCols - 1 && n.y > 0 && n.y < gridRows - 1) {
+          if (maze[n.y][n.x] === 0 && !visited[n.y][n.x]) {
+            visited[n.y][n.x] = true;
+            queue.push({x: n.x, y: n.y, dist: curr.dist + 1});
           }
         }
       }
-      return false;
     }
 
-    function initLevel() {
-      // Escalonamento de tamanho do labirinto para níveis infinitos
-      let rawDimension = 11 + Math.floor((level - 1) * 2);
-      // Mantém o tamanho do grid acessível para renderização limpa
-      gridCols = Math.min(rawDimension, 25);
-      gridRows = Math.min(rawDimension, 25);
+    reachable.sort((a, b) => b.dist - a.dist);
+    let bestGoal = reachable[0];
+    goal = { x: bestGoal.x, y: bestGoal.y };
+  }
 
-      // Dimensiona proporcionalmente no canvas
-      const maxCanvasWidth = Math.min(window.innerWidth - 40, 520);
-      canvas.width = maxCanvasWidth;
-      canvas.height = maxCanvasWidth;
-      tileSize = canvas.width / gridCols;
+  function initLevel() {
+    // Escalonamento Dinâmico dos níveis
+    gridCols = 11 + Math.min(Math.floor((level - 1) / 2) * 2, 12);
+    gridRows = 11 + Math.min(Math.floor((level - 1) / 2) * 2, 12);
 
-      // 1. Gera o labirinto base
-      generateMaze();
-      player = { x: 1, y: 1 };
+    tileSize = Math.floor(520 / gridCols);
+    canvas.width = gridCols * tileSize;
+    canvas.height = gridRows * tileSize;
 
-      // 2. Encontra o caminho crítico principal até a meta
-      let criticalPath = getCriticalPath(1, 1, goal.x, goal.y) || [];
-      let criticalSet = new Set(criticalPath.map(p => `${p.x},${p.y}`));
+    generateMaze();
+    player = { x: 1, y: 1 };
 
-      // 3. Coleta apenas células que NÃO pertencem ao caminho crítico principal
-      let nonCriticalCells = [];
-      for (let r = 0; r < gridRows; r++) {
-        for (let c = 0; c < gridCols; c++) {
-          if (maze[r][c] === 0) {
-            let key = `${c},${r}`;
-            if (!criticalSet.has(key) && !(r === 1 && c === 1) && !(r === goal.y && c === goal.x)) {
-              nonCriticalCells.push({ x: c, y: r });
-            }
-          }
-        }
-      }
-
-      // 4. Posiciona o fogo estrategicamente fora da rota crítica
-      nonCriticalCells.sort(() => Math.random() - 0.5);
-      let targetFiresCount = Math.min(nonCriticalCells.length, 1 + Math.floor(level * 1.2));
-      fires = nonCriticalCells.slice(0, targetFiresCount);
-
-      // 5. Garantia dupla de solutividade
-      if (!isSolvableWithFires()) {
-        fires = []; // Caso preventivo extremo, libera todas as chamas
-      }
-
-      levelValEl.textContent = level;
-      stepsValEl.textContent = steps;
-      draw();
+    // Garante rota livre principal no algoritmo BFS
+    let solutionPath = getShortestPath(player, goal, []);
+    let criticalSet = new Set();
+    if (solutionPath) {
+      solutionPath.forEach(p => criticalSet.add(`${p.x},${p.y}`));
     }
 
-    function generateMaze() {
-      maze = Array(gridRows).fill(0).map(() => Array(gridCols).fill(1));
-
-      function carve(x, y) {
-        maze[y][x] = 0;
-        const dirs = [
-          { dx: 0, dy: -2 },
-          { dx: 0, dy: 2 },
-          { dx: -2, dy: 0 },
-          { dx: 2, dy: 0 }
-        ].sort(() => Math.random() - 0.5);
-
-        for (let d of dirs) {
-          let nx = x + d.dx;
-          let ny = y + d.dy;
-          if (nx > 0 && nx < gridCols - 1 && ny > 0 && ny < gridRows - 1 && maze[ny][nx] === 1) {
-            maze[y + d.dy / 2][x + d.dx / 2] = 0;
-            carve(nx, ny);
-          }
+    // Posiciona o fogo sem bloquear o caminho seguro do jogador
+    fires = [];
+    let availableCells = [];
+    for (let r = 0; r < gridRows; r++) {
+      for (let c = 0; c < gridCols; c++) {
+        let key = `${c},${r}`;
+        if (maze[r][c] === 0 && !criticalSet.has(key)) {
+          availableCells.push({ x: c, y: r });
         }
       }
-
-      carve(1, 1);
-      maze[1][1] = 0;
-
-      // Descobre todas as células acessíveis e define a meta na mais distante
-      let reachable = [];
-      let queue = [{ x: 1, y: 1, dist: 0 }];
-      let visited = Array(gridRows).fill(0).map(() => Array(gridCols).fill(false));
-      visited[1][1] = true;
-
-      while (queue.length > 0) {
-        let curr = queue.shift();
-        reachable.push(curr);
-
-        let neighbors = [
-          { x: curr.x, y: curr.y - 1 },
-          { x: curr.x, y: curr.y + 1 },
-          { x: curr.x - 1, y: curr.y },
-          { x: curr.x + 1, y: curr.y }
-        ];
-        for (let n of neighbors) {
-          if (n.x > 0 && n.x < gridCols - 1 && n.y > 0 && n.y < gridRows - 1) {
-            if (maze[n.y][n.x] === 0 && !visited[n.y][n.x]) {
-              visited[n.y][n.x] = true;
-              queue.push({ x: n.x, y: n.y, dist: curr.dist + 1 });
-            }
-          }
-        }
-      }
-
-      reachable.sort((a, b) => b.dist - a.dist);
-      goal = { x: reachable[0].x, y: reachable[0].y };
     }
 
-    function movePlayer(dx, dy) {
-      if (!gameActive) return;
+    availableCells.sort(() => Math.random() - 0.5);
+    let targetFires = Math.min(availableCells.length, 1 + Math.floor(level * 1.2));
+    fires = availableCells.slice(0, targetFires);
 
-      if (dx === 1) playerDir = 'right';
-      else if (dx === -1) playerDir = 'left';
-      else if (dy === 1) playerDir = 'front';
-      else if (dy === -1) playerDir = 'back';
+    levelValEl.textContent = level;
+    stepsValEl.textContent = steps;
+    draw();
+  }
 
-      let newX = player.x + dx;
-      let newY = player.y + dy;
+  function movePlayer(dx, dy) {
+    if (!gameActive) return;
 
-      if (newX >= 0 && newX < gridCols && newY >= 0 && newY < gridRows) {
-        if (maze[newY][newX] === 0) {
-          player.x = newX;
-          player.y = newY;
-          steps++;
+    if (dx === 1) playerDir = 'right';
+    else if (dx === -1) playerDir = 'left';
+    else if (dy === 1) playerDir = 'front';
+    else if (dy === -1) playerDir = 'back';
+
+    let newX = player.x + dx;
+    let newY = player.y + dy;
+
+    if (newX >= 0 && newX < gridCols && newY >= 0 && newY < gridRows) {
+      if (maze[newY][newX] === 0) {
+        player.x = newX;
+        player.y = newY;
+        steps++;
+        stepsValEl.textContent = steps;
+
+        let hitFire = fires.some(f => f.x === player.x && f.y === player.y);
+        if (hitFire) {
+          playSoundEffect('hit');
+          player = { x: 1, y: 1 };
+          steps += 10;
           stepsValEl.textContent = steps;
+          canvas.style.boxShadow = '0 0 20px #ef4444';
+          setTimeout(() => { canvas.style.boxShadow = 'inset 0 4px 12px rgba(0,0,0,0.6)'; }, 300);
+        } else {
+          playSoundEffect('move');
+        }
 
-          let hitFire = fires.some(f => f.x === player.x && f.y === player.y);
-          if (hitFire) {
-            playSound('hit');
-            player = { x: 1, y: 1 };
-            steps += 5;
-            stepsValEl.textContent = steps;
-            canvas.style.boxShadow = '0 0 25px #ef4444';
-            setTimeout(() => { canvas.style.boxShadow = 'inset 0 4px 12px rgba(0,0,0,0.6)'; }, 300);
-          } else {
-            playSound('move');
-          }
+        draw();
 
-          draw();
+        if (player.x === goal.x && player.y === goal.y) {
+          gameActive = false;
+          playSoundEffect('win');
+          showWinScreen();
+        }
+      }
+    }
+  }
 
-          if (player.x === goal.x && player.y === goal.y) {
-            gameActive = false;
-            playSound('win');
-            showWinScreen();
-          }
+  function showWinScreen() {
+    menuTitle.textContent = `Nível ${level} Concluído! 🎉`;
+    menuDesc.textContent = `Excelente! Você concluiu o labirinto em ${steps} passos.`;
+    startBtn.textContent = `Avançar para Nível ${level + 1}`;
+    menuOverlay.style.display = 'flex';
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Renderização do Labirinto
+    for (let r = 0; r < gridRows; r++) {
+      for (let c = 0; c < gridCols; c++) {
+        let x = c * tileSize;
+        let y = r * tileSize;
+        if (maze[r][c] === 1) {
+          ctx.fillStyle = '#1e293b';
+          ctx.fillRect(x, y, tileSize, tileSize);
+          ctx.fillStyle = '#334155';
+          ctx.fillRect(x + 2, y + 2, tileSize - 4, tileSize - 4);
+        } else {
+          ctx.fillStyle = '#0f172a';
+          ctx.fillRect(x, y, tileSize, tileSize);
+          ctx.fillStyle = '#1e293b';
+          ctx.fillRect(x + tileSize / 2 - 1.5, y + tileSize / 2 - 1.5, 3, 3);
         }
       }
     }
 
-    function showWinScreen() {
-      menuTitle.textContent = `Nível ${level} Concluído! 🎉`;
-      menuDesc.textContent = `Incrível! Você venceu o desafio em ${steps} passos.`;
-      startBtn.textContent = `Avançar para Nível ${level + 1}`;
-      menuOverlay.style.display = 'flex';
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Renderização do mapa
-      for (let r = 0; r < gridRows; r++) {
-        for (let c = 0; c < gridCols; c++) {
-          let x = c * tileSize;
-          let y = r * tileSize;
-          if (maze[r][c] === 1) {
-            ctx.fillStyle = '#1e293b';
-            ctx.fillRect(x, y, tileSize, tileSize);
-            ctx.fillStyle = '#334155';
-            ctx.fillRect(x + 1, y + 1, tileSize - 2, tileSize - 2);
-          } else {
-            ctx.fillStyle = '#0f172a';
-            ctx.fillRect(x, y, tileSize, tileSize);
-          }
-        }
-      }
-
-      // Renderização de Fogo 🔥
-      fires.forEach(f => {
-        ctx.save();
-        ctx.translate(f.x * tileSize + tileSize / 2, f.y * tileSize + tileSize / 2);
-        ctx.font = `${Math.floor(tileSize * 0.7)}px sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('🔥', 0, 0);
-        ctx.restore();
-      });
-
-      // Renderização do Objetivo (💎)
+    // Fogo 🔥
+    fires.forEach(f => {
       ctx.save();
-      ctx.translate(goal.x * tileSize + tileSize / 2, goal.y * tileSize + tileSize / 2);
+      ctx.translate(f.x * tileSize + tileSize / 2, f.y * tileSize + tileSize / 2);
       ctx.font = `${Math.floor(tileSize * 0.75)}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('💎', 0, 0);
+      ctx.fillText('🔥', 0, 0);
       ctx.restore();
+    });
 
-      // Renderização do Jogador (Lua Diferente 🌙)
-      ctx.save();
-      ctx.translate(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2);
-      let currentImg = spriteImages[playerDir];
+    // Joia 💎
+    ctx.save();
+    ctx.translate(goal.x * tileSize + tileSize / 2, goal.y * tileSize + tileSize / 2);
+    ctx.font = `${Math.floor(tileSize * 0.75)}px sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('💎', 0, 0);
+    ctx.restore();
 
-      if (spritesLoaded >= 4 && currentImg.complete && currentImg.naturalWidth > 0) {
-        let size = tileSize * 1.5;
-        ctx.drawImage(currentImg, -size / 2, -size / 2, size, size);
-      } else {
-        ctx.font = `${Math.floor(tileSize * 0.85)}px sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('🌙', 0, 0);
-      }
-      ctx.restore();
+    // Sprite da Lua Diferente 🌙
+    ctx.save();
+    ctx.translate(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2);
+    let currentImg = spriteImages[playerDir];
+    if (spritesLoaded >= 4 && currentImg.complete) {
+      let size = tileSize * 1.5;
+      ctx.drawImage(currentImg, -size / 2, -size / 2, size, size);
+    } else {
+      ctx.font = `${Math.floor(tileSize * 0.9)}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🌙', 0, 0);
     }
+    ctx.restore();
+  }
 
-    // Atalhos de teclado
-    window.addEventListener('keydown', (e) => {
-      if (['KeyR', 'Keyr'].includes(e.code)) {
-        restartLevel();
-        e.preventDefault();
-        return;
-      }
-      if (!gameActive) return;
+  // Teclas do Teclado
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyR') { restartLevel(); return; }
+    if (!gameActive) return;
 
-      if (['ArrowUp', 'KeyW'].includes(e.code)) { movePlayer(0, -1); e.preventDefault(); }
-      if (['ArrowDown', 'KeyS'].includes(e.code)) { movePlayer(0, 1); e.preventDefault(); }
-      if (['ArrowLeft', 'KeyA'].includes(e.code)) { movePlayer(-1, 0); e.preventDefault(); }
-      if (['ArrowRight', 'KeyD'].includes(e.code)) { movePlayer(1, 0); e.preventDefault(); }
-      if (['Space', 'Enter'].includes(e.code) && menuOverlay.style.display === 'flex') {
-        handleMainButton();
-        e.preventDefault();
-      }
-    });
+    if (['ArrowUp', 'KeyW'].includes(e.code)) { movePlayer(0, -1); e.preventDefault(); }
+    if (['ArrowDown', 'KeyS'].includes(e.code)) { movePlayer(0, 1); e.preventDefault(); }
+    if (['ArrowLeft', 'KeyA'].includes(e.code)) { movePlayer(-1, 0); e.preventDefault(); }
+    if (['ArrowRight', 'KeyD'].includes(e.code)) { movePlayer(1, 0); e.preventDefault(); }
+    if (['Space', 'Enter'].includes(e.code) && menuOverlay.style.display === 'flex') {
+      handleMainButton();
+      e.preventDefault();
+    }
+  });
 
-    window.addEventListener('resize', () => {
-      if (gameActive) {
-        const maxCanvasWidth = Math.min(window.innerWidth - 40, 520);
-        canvas.width = maxCanvasWidth;
-        canvas.height = maxCanvasWidth;
-        tileSize = canvas.width / gridCols;
-        draw();
-      }
-    });
-
-    // Renderização inicial
-    generateMaze();
-    draw();
-  </script>
+  // Inicialização do preview
+  generateMaze();
+  draw();
+</script>
 </body>
 </html>
