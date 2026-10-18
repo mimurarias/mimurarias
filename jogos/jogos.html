@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mimurarias — Jogos Online</title>
+    <meta name="description" content="Jogos online gratuitos e estáticos desenvolvidos por Mimurarias.">
+    <meta name="author" content="Mimurarias">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+
+    <!-- CSS Original do Projeto -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* Estilos complementares para centralização e ajuste fino */
+        .hero-section {
+          padding: 3rem 1rem 2rem 1rem;
+          text-align: center;
+        }
+        .cards-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 1.5rem;
+          margin-top: 1.5rem;
+        }
+        .project-card {
+          background: var(--card-bg, rgba(255, 255, 255, 0.05));
+          border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+          border-radius: 12px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .project-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .card-media {
+          position: relative;
+          width: 100%;
+          height: 180px;
+          background-color: #1a202c;
+          overflow: hidden;
+        }
+        .card-media img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .card-body {
+          padding: 1.25rem;
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          justify-content: space-between;
+        }
+        .card-title {
+          font-size: 1.2rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+        }
+        .card-desc {
+          font-size: 0.9rem;
+          color: var(--text-muted, #a0aec0);
+          line-height: 1.5;
+          margin-bottom: 1.25rem;
+        }
+        .badge-tag {
+          display: inline-block;
+          background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+          color: #fff;
+          font-size: 0.75rem;
+          font-weight: 700;
+          padding: 0.25rem 0.6rem;
+          border-radius: 20px;
+          margin-bottom: 0.5rem;
+          align-self: flex-start;
+        }
+        .card-disabled {
+          opacity: 0.6;
+          filter: grayscale(0.5);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Cabecalho / Navegacao -->
+<header class="site-header">
+    <div class="nav-container">
+        <a href="index.html" class="brand-logo">
+            <div class="brand-icon">🎮</div>
+            <span>Mimurarias Jogos</span>
+        </a>
+
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <div id="google_translate_element"></div>
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar tema">
+                ☀️
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <h1 class="hero-title" style="margin-bottom: 0.75rem;">
+        <span class="gradient-text">Jogos Online Gratuitos</span>
+    </h1>
+    <p style="color: var(--text-muted, #a0aec0); font-size: 1rem; max-width: 500px; margin: 0 auto;">
+        Divirta-se diretamente no seu navegador, sem necessidade de download.
+    </p>
+</section>
+
+<!-- Conteudo Principal - Grade Exclusiva de Jogos -->
+<main class="main-content" style="max-width: 1000px; margin: 0 auto; padding: 0 1rem 3rem 1rem;">
+
+    <section class="section-block">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span>🎮</span> Catálogo de Jogos
+            </h2>
+        </div>
+
+        <div class="cards-grid">
+
+            <!-- 1. Jogo: Labirinto da Lua Diferente -->
+            <article class="project-card">
+                <div class="card-media">
+                    <img src="jogos/assets/images/labirinto-lua-diferente.png"
+                         onerror="this.onerror=null; this.src='jogos/assets/images/card.png';"
+                         alt="Labirinto da Lua Diferente Capa"
+                         loading="lazy">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge-tag">WEB &bull; HTML5</span>
+                        <h3 class="card-title">Labirinto da Lua Diferente</h3>
+                        <p class="card-desc">
+                            Guie a Lua Diferente através do labirinto espacial com níveis infinitos, desvie do fogo e alcance a joia preciosa!
+                        </p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="jogos/labirinto-lua-diferente/index.html" class="btn btn-primary" style="padding: 0.65rem 1.1rem; font-size: 0.95rem; width: 100%; text-align: center; text-decoration: none; display: inline-block;">
+                            ▶️ Jogar Agora
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Placeholder para os próximos jogos -->
+            <article class="project-card card-disabled">
+                <div class="card-media" style="display: flex; align-items: center; justify-content: center; color: #718096; font-size: 3rem;">
+                    🎲
+                </div>
+                <div class="card-body">
+                    <div>
+                        <span class="badge-tag" style="background: #4a5568;">EM BREVE</span>
+                        <h3 class="card-title">Novo Jogo em Breve</h3>
+                        <p class="card-desc">
+                            Mais jogos educativos e de puzzle estão sendo desenvolvidos para esta coleção.
+                        </p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-outline" disabled style="width: 100%; opacity: 0.6; cursor: not-allowed;">Em Breve</button>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+</main>
+
+<!-- Rodapé -->
+<footer class="site-footer">
+    <div class="footer-container" style="text-align: center; padding: 2rem 1rem;">
+        <p style="color: var(--text-muted, #a0aec0); font-size: 0.85rem; margin-bottom: 0.5rem;">
+            &copy; 2026 Mimurarias &bull; Jogos Web Estáticos
+        </p>
+        <p style="font-size: 0.8rem;">
+            <a href="index.html" style="color: var(--accent-color, #6366f1); text-decoration: none;">Voltar ao Portfólio Principal</a>
+        </p>
+    </div>
+</footer>
+
+<!-- Scripts do Projeto Original -->
+<script src="assets/js/main.js"></script>
+
+<!-- Google Translate -->
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'pt',
+        includedLanguages: 'en,es,pt',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
