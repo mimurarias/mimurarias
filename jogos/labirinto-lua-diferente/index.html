@@ -235,7 +235,7 @@
       <div>Passos: <span id="steps-val">0</span></div>
     </div>
 
-    <!-- Larger Canvas for bigger map & squares -->
+    <!-- Canvas for map & squares -->
     <canvas id="gameCanvas" width="520" height="520"></canvas>
 
     <div class="desktop-hint" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.75rem; text-align: center;">
@@ -273,9 +273,9 @@
     const menuDesc = document.getElementById('menuDesc');
     const startBtn = document.getElementById('startBtn');
 
-    // Game variables - Larger map and big squares
+    // Game variables
     let tileSize = 40;
-    let gridCols = 13; // Perfect balanced size with large squares
+    let gridCols = 13;
     let gridRows = 13;
     let level = 1;
     let steps = 0;
@@ -366,7 +366,7 @@
       gameActive = true;
     }
 
-    // Validate that a guaranteed solvable path exists from start to goal avoiding fires
+    // Bulletproof BFS validation for solvability
     function isSolvable() {
       let queue = [{x: 1, y: 1}];
       let visited = Array(gridRows).fill(0).map(() => Array(gridCols).fill(false));
@@ -397,8 +397,7 @@
     }
 
     function initLevel() {
-      // Larger map dimensions with big squares (Canvas width=520)
-      gridCols = 11 + (level * 2); // Level 1 = 13x13, Level 2 = 15x15, Level 3 = 17x17...
+      gridCols = 11 + (level * 2);
       gridRows = 11 + (level * 2);
 
       if (gridCols > 21) gridCols = 21;
@@ -408,9 +407,9 @@
       canvas.width = gridCols * tileSize;
       canvas.height = gridRows * tileSize;
 
+      // Generate maze and guarantee goal is reachable
       generateMaze();
       player = { x: 1, y: 1 };
-      goal = { x: gridCols - 2, y: gridRows - 2 };
 
       // Ensure 100% solvability by checking path with BFS
       let attempts = 0;
@@ -419,16 +418,16 @@
         let pathCells = [];
         for (let r = 0; r < gridRows; r++) {
           for (let c = 0; c < gridCols; c++) {
-            if (maze[r][c] === 0 && !(r === 1 && c === 1) && !(r === gridRows - 2 && c === gridCols - 2)) {
+            if (maze[r][c] === 0 && !(r === 1 && c === 1) && !(r === goal.y && c === goal.x)) {
               pathCells.push({ x: c, y: r });
             }
           }
         }
         pathCells.sort(() => Math.random() - 0.5);
-        let numFires = Math.min(pathCells.length, 2 + (level * 2));
+        let numFires = Math.min(pathCells.length, 1 + level); // fewer fires to prevent dead-end traps
         fires = pathCells.slice(0, numFires);
         attempts++;
-      } while (!isSolvable() && attempts < 100);
+      } while (!isSolvable() && attempts < 200);
 
       levelValEl.textContent = level;
       stepsValEl.textContent = steps;
@@ -459,7 +458,37 @@
 
       carve(1, 1);
       maze[1][1] = 0;
-      maze[gridRows - 2][gridCols - 2] = 0;
+
+      // Find all reachable path cells from (1,1) to guarantee goal is 100% reachable
+      let reachable = [];
+      let queue = [{x: 1, y: 1, dist: 0}];
+      let visited = Array(gridRows).fill(0).map(() => Array(gridCols).fill(false));
+      visited[1][1] = true;
+
+      while (queue.length > 0) {
+        let curr = queue.shift();
+        reachable.push(curr);
+
+        let neighbors = [
+          {x: curr.x, y: curr.y - 1},
+          {x: curr.x, y: curr.y + 1},
+          {x: curr.x - 1, y: curr.y},
+          {x: curr.x + 1, y: curr.y}
+        ];
+        for (let n of neighbors) {
+          if (n.x > 0 && n.x < gridCols - 1 && n.y > 0 && n.y < gridRows - 1) {
+            if (maze[n.y][n.x] === 0 && !visited[n.y][n.x]) {
+              visited[n.y][n.x] = true;
+              queue.push({x: n.x, y: n.y, dist: curr.dist + 1});
+            }
+          }
+        }
+      }
+
+      // Pick the furthest reachable cell as the goal
+      reachable.sort((a, b) => b.dist - a.dist);
+      let bestGoal = reachable[0]; // Furthest away from (1,1)
+      goal = { x: bestGoal.x, y: bestGoal.y };
     }
 
     function movePlayer(dx, dy) {
@@ -513,7 +542,7 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw gorgeous polished vector walls & paths with large squares
+      // Draw gorgeous polished vector walls & paths
       for (let r = 0; r < gridRows; r++) {
         for (let c = 0; c < gridCols; c++) {
           let x = c * tileSize;
@@ -532,11 +561,11 @@
         }
       }
 
-      // Draw Fires 🔥 (Large and clear)
+      // Draw Fires 🔥
       fires.forEach(f => {
         ctx.save();
         ctx.translate(f.x * tileSize + tileSize / 2, f.y * tileSize + tileSize / 2);
-        ctx.font = `${Math.floor(tileSize * 0.85)}px sans-serif`;
+        ctx.font = `${Math.floor(tileSize * 0.75)}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('🔥', 0, 0);
@@ -546,7 +575,7 @@
       // Draw Goal (Star ⭐)
       ctx.save();
       ctx.translate(goal.x * tileSize + tileSize / 2, goal.y * tileSize + tileSize / 2);
-      ctx.font = `${Math.floor(tileSize * 0.85)}px sans-serif`;
+      ctx.font = `${Math.floor(tileSize * 0.75)}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('⭐', 0, 0);
@@ -557,7 +586,7 @@
       ctx.translate(player.x * tileSize + tileSize / 2, player.y * tileSize + tileSize / 2);
       let currentImg = spriteImages[playerDir];
       if (spritesLoaded >= 4 && currentImg.complete) {
-        let size = tileSize * 2.4; // Huge character size!
+        let size = tileSize * 2.4;
         ctx.drawImage(currentImg, -size / 2, -size / 2, size, size);
       } else {
         ctx.font = `${Math.floor(tileSize * 2.0)}px sans-serif`;
