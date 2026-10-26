@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Scanner de Portas de Rede</title>
+</head>
+<body>
+    <h1>Política de Privacidade - Scanner de Portas de Rede</h1>
+    <p><strong>Última atualização:</strong> 25 de outubro de 2026</p>
+    <p><a href="privacy-en.html">English version</a></p>
+
+    <h2>1. Resumo</h2>
+    <p>O Scanner de Portas de Rede testa as portas TCP de um host que você mesmo digita (nome, IPv4 ou domínio) e mostra quais respondem. Ele não exige cadastro, login ou qualquer dado pessoal informado por você.</p>
+    <p>Para testar as portas, o aplicativo abre conexões diretas do seu aparelho até o alvo digitado. Não existe servidor do desenvolvedor no meio: as conexões saem do seu telefone e vão para o host escolhido. Nada é armazenado pelo desenvolvedor: não existe conta, banco de dados de usuários nem histórico de varreduras.</p>
+    <p>A <strong>versão gratuita exibe anúncios</strong> do Google AdMob, descritos abaixo. A compra única "remover anúncios" (dentro do aplicativo) desliga todos os anúncios.</p>
+
+    <h2>2. Dados que o aplicativo trata</h2>
+    <p>O aplicativo não coleta dados pessoais para o desenvolvedor. O que existe é o tráfego necessário para varrer as portas e para mostrar anúncios:</p>
+    <ul>
+        <li><strong>Varredura de portas</strong> — o aplicativo abre conexões TCP para as portas do host que você digitou. Como qualquer conexão de rede, o destino vê o endereço IP público de origem, a data e a hora. O desenvolvedor não recebe nem registra essas conexões.</li>
+        <li><strong>Consulta de IP público</strong> — para mostrar "IP público" no painel de rede, o aplicativo consulta um serviço de IP (ipv4.icanhazip.com, api.ipify.org ou checkip.amazonaws.com). A resposta é exibida na tela e não é armazenada.</li>
+        <li><strong>Dados de rede do aparelho</strong> — IP local, gateway e servidores DNS são lidos do próprio sistema e ficam apenas na memória do aplicativo.</li>
+        <li><strong>Identificador de Publicidade (Advertising ID)</strong> — usado apenas pelo SDK do Google AdMob para exibir e medir anúncios na versão gratuita.</li>
+        <li><strong>Dados de interação com anúncios</strong> — exibição, personalização e medição de anúncios, também pelo AdMob.</li>
+        <li><strong>Compra dentro do aplicativo</strong> — processada inteiramente pelo Google Play. O aplicativo guarda no próprio aparelho apenas um indicador de que a compra foi feita, para saber que deve parar de exibir anúncios.</li>
+    </ul>
+    <p>Não coletamos nome, e-mail, telefone, endereço, contatos, fotos, arquivos, informações de saúde, localização precisa nem histórico de navegação.</p>
+    <p><strong>Não enviamos crash log, stack trace, dados de desempenho nem telemetria de diagnóstico.</strong> Se o aplicativo travar, isso não é reportado para lugar nenhum.</p>
+
+    <h2>3. Uso das informações</h2>
+    <p>As informações são usadas exclusivamente para:</p>
+    <ul>
+        <li>Testar as portas do alvo escolhido e mostrar o resultado na tela</li>
+        <li>Exibir, medir e limitar anúncios na versão gratuita</li>
+        <li>Reconhecer a compra que remove os anúncios</li>
+    </ul>
+    <p>Não vendemos, alugamos nem compartilhamos dados pessoais com terceiros para fins de marketing.</p>
+
+    <h2>4. Publicidade</h2>
+    <p>A versão gratuita exibe anúncios do Google AdMob: banner na parte de baixo da tela, anúncio de abertura ao voltar ao aplicativo e um intersticial quando uma varredura termina. O SDK do Google pode coletar o identificador de publicidade do dispositivo e dados de interação com anúncios, conforme a <a href="https://policies.google.com/privacy">Política de Privacidade do Google</a> e a <a href="https://policies.google.com/technologies/ads">política de publicidade do Google</a>.</p>
+    <p>Quem compra a remoção de anúncios deixa de receber anúncios e o SDK do AdMob para de ser inicializado.</p>
+
+    <h2>5. Permissões</h2>
+    <p>O aplicativo solicita estas permissões:</p>
+    <ul>
+        <li><strong>INTERNET</strong> — conectar às portas do alvo, consultar o IP público e carregar os anúncios</li>
+        <li><strong>ACCESS_NETWORK_STATE</strong> — ler as informações da rede (IP local, gateway, DNS)</li>
+        <li><strong>com.android.vending.BILLING</strong> — processar a compra que remove os anúncios</li>
+        <li><strong>AD_ID e permissões do Google Ad Services</strong> — obter o identificador de publicidade, exigido pelo AdMob</li>
+    </ul>
+    <p>O aplicativo não pede acesso a câmera, microfone, contatos, fotos, arquivos, SMS, localização precisa nem telefone.</p>
+
+    <h2>6. Segurança dos dados</h2>
+    <p>As consultas de IP público e os anúncios usam HTTPS. As conexões de varredura são TCP diretas para o alvo que você escolheu. Nenhuma credencial é armazenada no aparelho além do indicador local de compra, e não mantemos servidores que recebam informações sobre quem usa o aplicativo.</p>
+
+    <h2>7. Uso responsável</h2>
+    <p>O aplicativo é uma ferramenta de diagnóstico de rede. Varra apenas hosts que sejam seus ou para os quais você tenha autorização. Varrer redes de terceiros sem permissão pode violar os termos de uso dessas redes e a legislação aplicável. O desenvolvedor não tem acesso ao que você varre nem aos resultados.</p>
+
+    <h2>8. Retenção e exclusão</h2>
+    <p>Não mantemos banco de dados com dados dos usuários. O histórico de varreduras não é salvo: fechar o aplicativo apaga os resultados da tela.</p>
+    <p>Os registros de acesso ficam com os provedores envolvidos (o host que você varreu, serviços de consulta de IP, Google AdMob, Google Play) conforme as políticas deles. Você pode redefinir o Advertising ID ou limitar o rastreamento nas configurações do aparelho. Desinstalar o aplicativo apaga o indicador local de compra (a compra em si continua na sua conta do Google Play e pode ser restaurada reinstalando o aplicativo).</p>
+
+    <h2>9. Cookies e tecnologias similares</h2>
+    <p>O aplicativo em si não utiliza cookies. O SDK do Google AdMob pode utilizar identificadores de dispositivo para publicidade e medição, conforme a política do Google vinculada na seção 4.</p>
+
+    <h2>10. Crianças</h2>
+    <p>Este aplicativo não é direcionado a crianças menores de 13 anos e não coletamos conscientemente dados de crianças. Não permitimos anúncios personalizados a menores de 13 anos.</p>
+
+    <h2>11. Mudanças nesta política</h2>
+    <p>Podemos atualizar esta política periodicamente. Mudanças significativas serão refletidas nesta página e na atualização do aplicativo.</p>
+
+    <h2>12. Contato</h2>
+    <p>Para dúvidas sobre esta política de privacidade:</p>
+    <p><strong>Email:</strong> emimura@gmail.com</p>
+    <p><strong>Site:</strong> <a href="https://emimura.github.io/mimurarias/">https://emimura.github.io/mimurarias/</a></p>
+</body>
+</html>
