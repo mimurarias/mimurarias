@@ -7,66 +7,47 @@
 </head>
 <body>
     <h1>Política de Privacidade - Tic Tac Toe</h1>
-    <p><strong>Última atualização:</strong> 26 de setembro de 2026</p>
+    <p><strong>Última atualização:</strong> 28 de outubro de 2026</p>
 
     <h2>1. Resumo</h2>
-    <p>O Tic Tac Toe é um jogo de velha. A versão gratuita exibe anúncios do Google AdMob e envia dados de diagnóstico ao New Relic para monitoramento de desempenho. A versão paga não contém anúncios nem o SDK do AdMob. O jogo em si é jogável offline, mas a versão gratuita requer internet para carregar anúncios e enviar telemetria.</p>
-    <p>Não coletamos nome, e-mail, telefone, endereço, contatos, fotos, arquivos, informações de saúde, localização precisa nem histórico de navegação. Nenhuma dessas informações é enviada ao New Relic ou a qualquer outro terceiro.</p>
+    <p>O Tic Tac Toe é um jogo de velha. A versão gratuita exibe anúncios do Google AdMob. A versão paga não contém anúncios nem o SDK do AdMob. O jogo funciona offline; a versão gratuita só precisa de internet para carregar os anúncios.</p>
+    <p>Não coletamos nome, e-mail, telefone, endereço, contatos, fotos, arquivos, informações de saúde, localização precisa nem histórico de navegação. Nenhuma dessas informações é enviada a qualquer terceiro.</p>
 
     <h2>2. Informações Coletadas</h2>
-    <p>O aplicativo não coleta dados pessoais diretamente. As seguintes informações são processadas por terceiros:</p>
+    <p>O aplicativo não coleta dados pessoais diretamente e não mantém servidor. As informações abaixo são processadas pelo Google, por meio do SDK do AdMob:</p>
     <ul>
         <li><strong>Identificador de Publicidade (Advertising ID)</strong> — exibição e medição de anúncios</li>
         <li><strong>Dados de interação com anúncios</strong> — exibição, personalização e medição de anúncios</li>
-        <li><strong>Dados técnicos de desempenho</strong> — erros, lentidão, travamentos e requisições de rede, tratados pelo New Relic (ver seção 4.1)</li>
-        <li><strong>Endereço IP</strong> — usado apenas para derivar a localização aproximada do servidor, conforme a seção 4.1</li>
+        <li><strong>Localização aproximada</strong> — derivada do endereço IP pelo AdMob, para segmentar anúncios</li>
     </ul>
-    <p>Não coletamos nome, e-mail, telefone, endereço, contatos, fotos, arquivos, informações de saúde, localização precisa nem histórico de navegação. Nenhuma dessas informações é enviada ao New Relic nem a qualquer outro terceiro.</p>
+    <p>O aplicativo não envia crash log, stack trace, dados de desempenho nem telemetria de diagnóstico. Se o jogo travar, isso não é reportado para lugar nenhum.</p>
+    <p>Não coletamos nome, e-mail, telefone, endereço, contatos, fotos, arquivos, informações de saúde, localização precisa nem histórico de navegação.</p>
 
     <h2>3. Uso das Informações</h2>
-    <p>As informações são usadas exclusivamente para:</p>
-    <ul>
-        <li>Exibir, medir e limitar anúncios</li>
-        <li>Diagnosticar erros, lentidão e travamentos do aplicativo (New Relic)</li>
-        <li>Melhorar a estabilidade e o desempenho das próximas versões</li>
-    </ul>
-    <p>Não vendemos, alugamos nem compartilhamos seus dados pessoais com terceiros para fins de marketing. Não usamos os dados de diagnóstico para publicidade.</p>
+    <p>As informações são usadas exclusivamente para exibir, medir e limitar anúncios.</p>
+    <p>Não vendemos, alugamos nem compartilhamos seus dados pessoais com terceiros para fins de marketing.</p>
 
     <h2>4. Publicidade</h2>
     <p>A versão gratuita exibe anúncios do Google AdMob, em formato de banner na tela principal e de anúncios de abertura de app quando você volta ao aplicativo. O SDK do Google pode coletar o identificador de publicidade do dispositivo e dados de interação com anúncios, conforme a <a href="https://policies.google.com/privacy">Política de Privacidade do Google</a> e a <a href="https://policies.google.com/technologies/ads">política de publicidade do Google</a>. Os anúncios podem ser personalizados com base no seu dispositivo e na sua atividade no aplicativo.</p>
     <p>A versão paga do aplicativo não contém anúncios nem o SDK do AdMob.</p>
 
-    <h2>4.1. Monitoramento de desempenho (New Relic)</h2>
-    <p>O aplicativo usa o agente <a href="https://newrelic.com">New Relic</a> para detectar erros, lentidão e travamentos. O agente é integrado ao aplicativo e envia somente dados de desempenho, pela Internet, com criptografia (HTTPS) e validação do certificado do servidor. A configuração está descrita na <a href="https://newrelic.com/terms/privacy">Política de Privacidade do New Relic</a>.</p>
-    <p>No seu aparelho, o aplicativo chama apenas a inicialização do agente com o token da aplicação. Não enviamos identificador de usuário, e-mail, nome ou qualquer atributo personalizado: não há código no aplicativo que associe a telemetria a você.</p>
-    <p>O que é enviado ao New Relic:</p>
-    <ul>
-        <li><strong>Sobre o aparelho</strong>: modelo, fabricante, versão do sistema, nome da operadora, tamanho e orientação da tela, duração da sessão e um identificador único de instalação, gerado pelo agente e guardado apenas nas preferências do próprio aplicativo</li>
-        <li><strong>Sobre requisições de rede</strong>: o endereço das requisições feitas pelo aplicativo (no caso, as chamadas de anúncios do AdMob), com o código de status HTTP, o tempo de resposta e o tamanho da resposta. O agente remove da URL a query string, o fragmento, o usuário e a senha antes de enviar</li>
-        <li><strong>Em caso de erro</strong>: os 2 primeiros kilobytes do corpo da resposta e a stack trace da chamada, apenas quando a resposta HTTP é de erro (4xx ou 5xx) ou a conexão falha</li>
-        <li><strong>Em caso de travamento</strong>: a stack trace do erro e o estado das threads, para permitir identificar a causa</li>
-        <li><strong>Endereço IP</strong>: usado apenas como consulta para derivar país, estado, código postal e coordenadas aproximadas. O New Relic afirma que não retém o IP após essa conversão e que o mantém em memória por no máximo seis horas</li>
-    </ul>
-    <p>Esses dados são usados para diagnosticar falhas e lentidão, e não para publicidade nem para finalidades de marketing. Os dados de desempenho ficam apenas na memória do aplicativo enquanto ele está aberto, e não são gravados no armazenamento do aparelho.</p>
-    <p>Se preferir não enviar telemetria de diagnóstico, basta desinstalar o aplicativo. Não há uma opção para desligar o agente dentro do app.</p>
-
     <h2>5. Permissões</h2>
     <p>O aplicativo solicita estas permissões:</p>
     <ul>
-        <li><strong>INTERNET</strong> — carregar anúncios e enviar os dados de diagnóstico descritos na seção 4.1</li>
-        <li><strong>ACCESS_NETWORK_STATE</strong> — identificar o tipo de rede para exibir anúncios e enviar a telemetria</li>
+        <li><strong>INTERNET</strong> — carregar os anúncios</li>
+        <li><strong>ACCESS_NETWORK_STATE</strong> — verificar se há conexão antes de pedir o anúncio</li>
     </ul>
     <p>O aplicativo não solicita acesso à câmera, ao microfone, à localização, aos contatos, ao armazenamento nem a qualquer outro dado pessoal.</p>
 
     <h2>6. Segurança dos Dados</h2>
-    <p>Os dados são transmitidos por conexões criptografadas (HTTPS) e seguem práticas padrão de segurança da indústria. Não armazenamos credenciais nem dados pessoais em nossos servidores.</p>
+    <p>O tráfego de anúncios usa conexões criptografadas (HTTPS). Não mantemos credenciais nem dados pessoais em servidores nossos.</p>
 
     <h2>7. Retenção e Exclusão</h2>
-    <p>Não mantemos banco de dados com dados dos usuários. Os dados de anúncios são retidos pelos respectivos anunciantes e pela rede do Google AdMob conforme as políticas deles. Os dados de desempenho são tratados pelo New Relic conforme a política de privacidade e o aviso de privacidade de serviços dele.</p>
-    <p>Você pode redefinir o Advertising ID, limitar o rastreamento pelo aparelho ou excluir os dados de anúncios nas configurações do seu aparelho. Para solicitar a exclusão dos dados de diagnóstico associados a este aplicativo, entre em contato pelo e-mail da seção 11.</p>
+    <p>Não mantemos banco de dados com dados dos usuários nem histórico de partidas. Os dados de anúncios são retidos pelo Google AdMob e pelos respectivos anunciantes, conforme as políticas deles.</p>
+    <p>Você pode redefinir o Advertising ID ou limitar o rastreamento nas configurações do seu aparelho.</p>
 
     <h2>8. Cookies e Tecnologias Similares</h2>
-    <p>O aplicativo em si não utiliza cookies. O SDK do Google AdMob pode utilizar identificadores de dispositivo para fins de publicidade e análise, conforme a política do Google vinculada na seção 4. O agente do New Relic guarda um identificador de instalação gerado por ele nas preferências do aplicativo, e não cria cookies.</p>
+    <p>O aplicativo em si não utiliza cookies. O SDK do Google AdMob pode utilizar identificadores de dispositivo para fins de publicidade e medição, conforme a política do Google vinculada na seção 4.</p>
 
     <h2>9. Crianças</h2>
     <p>Este aplicativo não é direcionado a crianças ou adolescentes com menos de 13 anos e não coletamos conscientemente dados de crianças. Não permitimos anúncios personalizados a menores de 13 anos.</p>
@@ -77,5 +58,6 @@
     <h2>11. Contato</h2>
     <p>Para dúvidas sobre esta política de privacidade:</p>
     <p><strong>Email:</strong> emimura@gmail.com</p>
+    <p><strong>Site:</strong> <a href="https://mimurarias.com">https://mimurarias.com</a></p>
 </body>
 </html>

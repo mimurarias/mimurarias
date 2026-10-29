@@ -18,7 +18,7 @@
     <h2>2. Data the app processes</h2>
     <p>The app does not collect personal data for the developer. What exists is the traffic needed to measure and to show ads:</p>
     <ul>
-        <li><strong>Speed measurement</strong> — the app sends HTTP requests to CDN servers (Cloudflare and, as a fallback, OVH) and receives the data back. Those servers log the request as any web server does: source IP address, date and time, transfer size.</li>
+        <li><strong>Speed measurement</strong> — the app sends HTTP requests to CDN servers (Cloudflare and, as a fallback, CacheFly) and receives the data back. Those servers log the request as any web server does: source IP address, date and time, transfer size.</li>
         <li><strong>Advertising ID</strong> — used only by the Google AdMob SDK to serve and measure ads in the free version.</li>
         <li><strong>Ad interaction data</strong> — ad display, personalization and measurement, also by AdMob.</li>
         <li><strong>Public IP lookup</strong> — to show "Public IP" on the network panel, the app queries an IP service (ipv4.icanhazip.com, api.ipify.org or checkip.amazonaws.com). The answer is displayed on screen and is not stored.</li>
@@ -39,7 +39,7 @@
 
     <h2>4. Advertising</h2>
     <p>The free version shows Google AdMob ads: a banner at the bottom of the screen, an app-open ad when returning to the app and, occasionally, an interstitial at the end of a test. The Google SDK may collect the device advertising ID and ad interaction data, under the <a href="https://policies.google.com/privacy">Google Privacy Policy</a> and the <a href="https://policies.google.com/technologies/ads">Google advertising policies</a>.</p>
-    <p>Anyone who buys the ad removal stops receiving ads, and the AdMob SDK is no longer initialized.</p>
+    <p>Anyone who buys the ad removal stops receiving ads: the app no longer requests banners, app-open ads, or interstitials.</p>
 
     <h2>5. Permissions</h2>
     <p>The app requests these permissions:</p>
@@ -70,6 +70,6 @@
     <h2>11. Contact</h2>
     <p>Questions about this privacy policy:</p>
     <p><strong>Email:</strong> emimura@gmail.com</p>
-    <p><strong>Website:</strong> <a href="https://emimura.github.io/mimurarias/">https://emimura.github.io/mimurarias/</a></p>
+    <p><strong>Website:</strong> <a href="https://mimurarias.com">https://mimurarias.com</a></p>
 </body>
 </html>
