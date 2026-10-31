@@ -26,7 +26,7 @@
       </p>
 
       <p class="home-counter">
-        START pressed: <span id="counter-value">—</span>
+        Visitas: <span id="stat-visits">—</span> | STARTs: <span id="stat-clicks">—</span>
       </p>
     </div>
 
@@ -36,46 +36,47 @@
   <script>
     const btn = document.getElementById('start-btn');
     const msg = document.getElementById('start-msg');
-    const counter = document.getElementById('counter-value');
+    const visitsEl = document.getElementById('stat-visits');
+    const clicksEl = document.getElementById('stat-clicks');
 
-    const LOCAL_KEY = 'mimurarias-starts';
-    const localCount = () => Number(localStorage.getItem(LOCAL_KEY) || 0);
+    const pad = (n) => String(n).padStart(4, '0');
 
-    function showCount(n) {
-      counter.textContent = String(n).padStart(4, '0');
+    // Only the global totals are shown; values never come from this page.
+    function show(data) {
+      if (!data || typeof data.visits !== 'number' || typeof data.clicks !== 'number') return;
+      visitsEl.textContent = pad(data.visits);
+      clicksEl.textContent = pad(data.clicks);
     }
 
-    async function readCount() {
-      try {
-        const res = await fetch('/api/count');
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        showCount(data.count);
-      } catch {
-        showCount(localCount());
-      }
+    async function count(action) {
+      const res = await fetch('/api/count', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ action }),
+      });
+      if (!res.ok) throw new Error(res.status);
+      return res.json();
     }
 
-    async function pressStart() {
-      msg.hidden = false;
+    let busy = false;
+    btn.addEventListener('click', async () => {
+      if (busy) return;
+      busy = true;
       btn.disabled = true;
+      msg.hidden = false;
 
       try {
-        const res = await fetch('/api/count', { method: 'POST' });
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        showCount(data.count);
+        show(await count('click'));
       } catch {
-        const next = localCount() + 1;
-        localStorage.setItem(LOCAL_KEY, String(next));
-        showCount(next);
+        // Contador indisponível: mantém o último valor válido.
       } finally {
         btn.disabled = false;
+        busy = false;
       }
-    }
+    });
 
-    btn.addEventListener('click', pressStart);
-    readCount();
+    // Uma conexão por carregamento da homepage.
+    count('visit').then(show).catch(() => {});
   </script>
 </body>
 </html>
