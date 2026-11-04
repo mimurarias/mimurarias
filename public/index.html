@@ -3,80 +3,401 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mimurarias</title>
-  <meta name="description" content="Mimurarias.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body class="home">
+  <title>Mimurarias — Apps Android no Google Play</title>
+  <meta name="description" content="Site oficial da Mimurarias. Apps Android no Google Play: APK AppSec, Network Ping Test, Lanterna SOS e Jogo da Velha. Links oficiais e políticas de privacidade.">
+  <meta name="author" content="Mimurarias">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://mimurarias.com/">
 
-  <main class="home-stage">
-    <div class="home-panel">
-      <h1 class="home-wordart">MIMURARIAS</h1>
-      <p class="home-tag">> press start <</p>
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0b1120" media="(prefers-color-scheme: dark)">
 
-      <button id="start-btn" class="start-btn" type="button">START</button>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mimurarias">
+  <meta property="og:title" content="Mimurarias — Apps Android no Google Play">
+  <meta property="og:description" content="Apps Android oficiais da Mimurarias: APK AppSec, Network Ping Test, Lanterna SOS e Jogo da Velha. Links do Google Play e políticas de privacidade.">
+  <meta property="og:url" content="https://mimurarias.com/">
+  <meta property="og:locale" content="pt_BR">
 
-      <p id="start-msg" class="start-msg" role="status" aria-live="polite" hidden>
-        Obrigado por pressionar START! 💜
-      </p>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mimurarias — Apps Android no Google Play">
+  <meta name="twitter:description" content="Apps Android oficiais da Mimurarias: APK AppSec, Network Ping Test, Lanterna SOS e Jogo da Velha.">
 
-      <p class="home-counter">
-        Visitas: <span id="stat-visits">—</span> | STARTs: <span id="stat-clicks">—</span>
-      </p>
-    </div>
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/style.css">
 
-    <div class="home-ground" aria-hidden="true"></div>
-  </main>
-
-  <script>
-    const btn = document.getElementById('start-btn');
-    const msg = document.getElementById('start-msg');
-    const visitsEl = document.getElementById('stat-visits');
-    const clicksEl = document.getElementById('stat-clicks');
-
-    const pad = (n) => String(n).padStart(4, '0');
-
-    // Only the global totals are shown; values never come from this page.
-    function show(data) {
-      if (!data || typeof data.visits !== 'number' || typeof data.clicks !== 'number') return;
-      visitsEl.textContent = pad(data.visits);
-      clicksEl.textContent = pad(data.clicks);
-    }
-
-    async function count(action) {
-      const res = await fetch('/api/count', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ action }),
-      });
-      if (!res.ok) throw new Error(res.status);
-      return res.json();
-    }
-
-    let busy = false;
-    btn.addEventListener('click', async () => {
-      if (busy) return;
-      busy = true;
-      btn.disabled = true;
-      msg.hidden = false;
-
-      try {
-        show(await count('click'));
-      } catch {
-        // Contador indisponível: mantém o último valor válido.
-      } finally {
-        btn.disabled = false;
-        busy = false;
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://mimurarias.com/#organization",
+        "name": "Mimurarias",
+        "url": "https://mimurarias.com/",
+        "logo": "https://mimurarias.com/logo.svg",
+        "email": "support@mimurarias.com",
+        "sameAs": [
+          "https://play.google.com/store/apps/developer?id=Mimurarias"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://mimurarias.com/#website",
+        "url": "https://mimurarias.com/",
+        "name": "Mimurarias",
+        "inLanguage": "pt-BR",
+        "publisher": {
+          "@id": "https://mimurarias.com/#organization"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mimurarias.com/#webpage",
+        "url": "https://mimurarias.com/",
+        "name": "Mimurarias — Apps Android no Google Play",
+        "description": "Site oficial da Mimurarias. Apps Android no Google Play: APK AppSec, Network Ping Test, Lanterna SOS e Jogo da Velha. Links oficiais e políticas de privacidade.",
+        "inLanguage": "pt-BR",
+        "isPartOf": {
+          "@id": "https://mimurarias.com/#website"
+        },
+        "mainEntity": {
+          "@id": "https://mimurarias.com/#apps"
+        }
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://mimurarias.com/#apps",
+        "name": "Aplicativos Android oficiais da Mimurarias",
+        "numberOfItems": 4,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@id": "https://mimurarias.com/#app-apkappsec"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@id": "https://mimurarias.com/#app-pingtest"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@id": "https://mimurarias.com/#app-flashlight"
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+              "@id": "https://mimurarias.com/#app-tictactoe"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://mimurarias.com/#app-apkappsec",
+        "name": "APK AppSec: Secrets e Falhas",
+        "identifier": "br.com.mimurarias.apkappsec",
+        "description": "Auditoria estática de segurança e conformidade de arquivos APK, executada localmente no aparelho Android.",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Android",
+        "inLanguage": "pt-BR",
+        "url": "https://mimurarias.com/apps/apkappsec/",
+        "installUrl": "https://play.google.com/store/apps/details?id=br.com.mimurarias.apkappsec",
+        "sameAs": [
+          "https://play.google.com/store/apps/details?id=br.com.mimurarias.apkappsec"
+        ],
+        "image": "https://mimurarias.com/assets/images/apkappsec-icon.png",
+        "screenshot": [
+          "https://mimurarias.com/assets/apps/apkappsec/shot-1.webp",
+          "https://mimurarias.com/assets/apps/apkappsec/shot-2.webp",
+          "https://mimurarias.com/assets/apps/apkappsec/shot-3.webp",
+          "https://mimurarias.com/assets/apps/apkappsec/shot-4.webp"
+        ],
+        "featureList": [
+          "Inspeção estática de APK 100% offline no celular",
+          "Detecção de secrets hardcoded de IA e Cloud",
+          "Scanner de entropia de Shannon",
+          "Mapeamento de superfície de ataque e manifesto"
+        ],
+        "publisher": {
+          "@id": "https://mimurarias.com/#organization"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": 0,
+          "priceCurrency": "BRL"
+        },
+        "subjectOf": [
+          {
+            "@type": "WebPage",
+            "name": "Política de Privacidade - APK AppSec",
+            "url": "https://mimurarias.com/apkappsec/privacy",
+            "inLanguage": "pt-BR"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Privacy Policy - APK AppSec",
+            "url": "https://mimurarias.com/apkappsec/privacy-en",
+            "inLanguage": "en"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://mimurarias.com/#app-pingtest",
+        "name": "Network Ping Test: Latência",
+        "identifier": "br.com.mimurarias.pingtest",
+        "description": "Teste de latência, perda de pacotes e conectividade de rede em dispositivos Android.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Android",
+        "inLanguage": "pt-BR",
+        "url": "https://mimurarias.com/apps/pingtest/",
+        "installUrl": "https://play.google.com/store/apps/details?id=br.com.mimurarias.pingtest",
+        "sameAs": [
+          "https://play.google.com/store/apps/details?id=br.com.mimurarias.pingtest"
+        ],
+        "image": "https://mimurarias.com/assets/images/pingtest-icon.png",
+        "screenshot": [
+          "https://mimurarias.com/assets/apps/pingtest/shot-1.webp",
+          "https://mimurarias.com/assets/apps/pingtest/shot-2.webp",
+          "https://mimurarias.com/assets/apps/pingtest/shot-3.webp",
+          "https://mimurarias.com/assets/apps/pingtest/shot-4.webp"
+        ],
+        "featureList": [
+          "Ping TCP para portas 80 e 443 sem bloqueio ICMP",
+          "Latência mínima, média e máxima em tempo real",
+          "Gráfico de estabilidade ao longo do tempo",
+          "Diagnóstico de IP público e gateway"
+        ],
+        "publisher": {
+          "@id": "https://mimurarias.com/#organization"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": 0,
+          "priceCurrency": "BRL"
+        },
+        "subjectOf": [
+          {
+            "@type": "WebPage",
+            "name": "Política de Privacidade - Network Ping Test",
+            "url": "https://mimurarias.com/pingtest/privacy",
+            "inLanguage": "pt-BR"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://mimurarias.com/#app-flashlight",
+        "name": "Lanterna estroboscópica SOS",
+        "identifier": "br.com.mimurarias.flashlight",
+        "description": "Lanterna com estroboscópio ajustável e sinal SOS para dispositivos Android.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Android",
+        "inLanguage": "pt-BR",
+        "url": "https://mimurarias.com/apps/flashlight/",
+        "installUrl": "https://play.google.com/store/apps/details?id=br.com.mimurarias.flashlight",
+        "sameAs": [
+          "https://play.google.com/store/apps/details?id=br.com.mimurarias.flashlight"
+        ],
+        "image": "https://mimurarias.com/assets/images/flashlight-icon.png",
+        "screenshot": [
+          "https://mimurarias.com/assets/apps/flashlight/shot-1.webp",
+          "https://mimurarias.com/assets/apps/flashlight/shot-2.webp",
+          "https://mimurarias.com/assets/apps/flashlight/shot-3.webp",
+          "https://mimurarias.com/assets/apps/flashlight/shot-4.webp"
+        ],
+        "featureList": [
+          "Modo Lanterna contínua",
+          "Estroboscópio de 1 a 30 Hz",
+          "Sinal SOS de emergência",
+          "Sem permissões abusivas de câmera"
+        ],
+        "publisher": {
+          "@id": "https://mimurarias.com/#organization"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": 0,
+          "priceCurrency": "BRL"
+        },
+        "subjectOf": [
+          {
+            "@type": "WebPage",
+            "name": "Política de Privacidade - Lanterna SOS Strobe",
+            "url": "https://mimurarias.com/flashlight/privacy",
+            "inLanguage": "pt-BR"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Privacy Policy - Strobe SOS Flashlight",
+            "url": "https://mimurarias.com/flashlight/privacy-en",
+            "inLanguage": "en"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://mimurarias.com/#app-tictactoe",
+        "name": "Jogo da Velha",
+        "identifier": "br.com.mimurarias.tictactoe",
+        "description": "Jogo da velha para dois jogadores locais ou contra a inteligência artificial em dispositivos Android.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Android",
+        "inLanguage": "pt-BR",
+        "url": "https://mimurarias.com/apps/tictactoe/",
+        "installUrl": "https://play.google.com/store/apps/details?id=br.com.mimurarias.tictactoe",
+        "sameAs": [
+          "https://play.google.com/store/apps/details?id=br.com.mimurarias.tictactoe"
+        ],
+        "image": "https://mimurarias.com/assets/images/tictactoe-icon.png",
+        "screenshot": [
+          "https://mimurarias.com/assets/apps/tictactoe/shot-1.webp",
+          "https://mimurarias.com/assets/apps/tictactoe/shot-2.webp",
+          "https://mimurarias.com/assets/apps/tictactoe/shot-3.webp",
+          "https://mimurarias.com/assets/apps/tictactoe/shot-4.webp"
+        ],
+        "featureList": [
+          "IA com 10 níveis de dificuldade",
+          "Modo 2 jogadores no mesmo aparelho",
+          "Estatísticas completas de partidas",
+          "Design otimizado para telas OLED"
+        ],
+        "publisher": {
+          "@id": "https://mimurarias.com/#organization"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": 0,
+          "priceCurrency": "BRL"
+        },
+        "subjectOf": [
+          {
+            "@type": "WebPage",
+            "name": "Política de Privacidade - Tic Tac Toe",
+            "url": "https://mimurarias.com/tictactoe/privacy",
+            "inLanguage": "pt-BR"
+          },
+          {
+            "@type": "WebPage",
+            "name": "Privacy Policy - Tic Tac Toe",
+            "url": "https://mimurarias.com/tictactoe/privacy-en",
+            "inLanguage": "en"
+          }
+        ]
       }
-    });
-
-    // Uma conexão por carregamento da homepage.
-    count('visit').then(show).catch(() => {});
+    ]
+  }
   </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <div class="wrap">
+    <header class="site-header">
+      <p class="eyebrow">Site oficial</p>
+      <h1>Mimurarias</h1>
+      <p class="lead">Aplicativos Android publicados no Google Play. Esta página reúne os links oficiais e as políticas de privacidade de cada app.</p>
+    </header>
+
+    <main id="conteudo">
+      <section aria-labelledby="apps-title">
+        <div class="section-head">
+          <h2 id="apps-title">Aplicativos</h2>
+          <a class="all-apps" href="https://play.google.com/store/apps/developer?id=Mimurarias" target="_blank" rel="noopener">Perfil no Google Play ↗</a>
+        </div>
+
+        <ul class="apps">
+          <li class="app">
+            <div class="app-head">
+              <img src="/assets/images/apkappsec-icon.png" alt="" width="48" height="48" loading="lazy" decoding="async">
+              <div>
+                <h3><a href="/apps/apkappsec/">APK AppSec: Secrets e Falhas</a></h3>
+                <p class="package"><code>br.com.mimurarias.apkappsec</code></p>
+              </div>
+            </div>
+            <p>Auditoria estática de segurança e conformidade de arquivos APK, executada localmente no aparelho Android.</p>
+            <div class="app-links">
+              <a class="app-more" href="/apps/apkappsec/">Detalhes do app →</a>
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.apkappsec" target="_blank" rel="noopener">Google Play ↗</a>
+              <a href="/apkappsec/privacy">Política de privacidade</a>
+              <a href="/apkappsec/privacy-en" hreflang="en" lang="en">Privacy (EN)</a>
+            </div>
+          </li>
+
+          <li class="app">
+            <div class="app-head">
+              <img src="/assets/images/pingtest-icon.png" alt="" width="48" height="48" loading="lazy" decoding="async">
+              <div>
+                <h3><a href="/apps/pingtest/">Network Ping Test: Latência</a></h3>
+                <p class="package"><code>br.com.mimurarias.pingtest</code></p>
+              </div>
+            </div>
+            <p>Teste de latência, perda de pacotes e conectividade de rede em dispositivos Android.</p>
+            <div class="app-links">
+              <a class="app-more" href="/apps/pingtest/">Detalhes do app →</a>
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.pingtest" target="_blank" rel="noopener">Google Play ↗</a>
+              <a href="/pingtest/privacy">Política de privacidade</a>
+            </div>
+          </li>
+
+          <li class="app">
+            <div class="app-head">
+              <img src="/assets/images/flashlight-icon.png" alt="" width="48" height="48" loading="lazy" decoding="async">
+              <div>
+                <h3><a href="/apps/flashlight/">Lanterna estroboscópica SOS</a></h3>
+                <p class="package"><code>br.com.mimurarias.flashlight</code></p>
+              </div>
+            </div>
+            <p>Lanterna com estroboscópio ajustável e sinal SOS para dispositivos Android.</p>
+            <div class="app-links">
+              <a class="app-more" href="/apps/flashlight/">Detalhes do app →</a>
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.flashlight" target="_blank" rel="noopener">Google Play ↗</a>
+              <a href="/flashlight/privacy">Política de privacidade</a>
+              <a href="/flashlight/privacy-en" hreflang="en" lang="en">Privacy (EN)</a>
+            </div>
+          </li>
+
+          <li class="app">
+            <div class="app-head">
+              <img src="/assets/images/tictactoe-icon.png" alt="" width="48" height="48" loading="lazy" decoding="async">
+              <div>
+                <h3><a href="/apps/tictactoe/">Jogo da Velha</a></h3>
+                <p class="package"><code>br.com.mimurarias.tictactoe</code></p>
+              </div>
+            </div>
+            <p>Jogo da velha para dois jogadores locais ou contra a inteligência artificial em dispositivos Android.</p>
+            <div class="app-links">
+              <a class="app-more" href="/apps/tictactoe/">Detalhes do app →</a>
+              <a href="https://play.google.com/store/apps/details?id=br.com.mimurarias.tictactoe" target="_blank" rel="noopener">Google Play ↗</a>
+              <a href="/tictactoe/privacy">Política de privacidade</a>
+              <a href="/tictactoe/privacy-en" hreflang="en" lang="en">Privacy (EN)</a>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="note" aria-labelledby="policies-title">
+        <h2 id="policies-title">Políticas de privacidade</h2>
+        <p>As políticas oficiais de cada aplicativo estão neste domínio, em português e, quando disponível, em inglês. Elas são mantidas para conformidade com o Google Play e para consulta pública.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><a href="https://play.google.com/store/apps/developer?id=Mimurarias" target="_blank" rel="noopener">Perfil do desenvolvedor no Google Play ↗</a></p>
+      <p>Contato: <a href="mailto:support@mimurarias.com">support@mimurarias.com</a></p>
+      <p>© 2026 Mimurarias · <a href="https://mimurarias.com/">mimurarias.com</a></p>
+    </footer>
+  </div>
 </body>
 </html>

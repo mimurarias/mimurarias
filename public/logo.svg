@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Mimurarias">
+  <title>Mimurarias</title>
+  <rect width="512" height="512" rx="96" fill="#0f172a"/>
+  <path d="M112 384V128h56l88 128 88-128h56v256h-56V224l-88 120-88-120v160z" fill="#f8fafc"/>
+</svg>

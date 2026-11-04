@@ -1,0 +1,29 @@
+# Cabeçalhos de segurança para os assets estáticos.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Políticas mantidas para compatibilidade com versões antigas dos apps.
+# Elas continuam acessíveis, mas não devem ser indexadas.
+/apk-privacy-audit/*
+  X-Robots-Tag: noindex, nofollow
+
+/desenhosfloresta/*
+  X-Robots-Tag: noindex, nofollow
+
+/desenhosnatal/*
+  X-Robots-Tag: noindex, nofollow
+
+/geotools/*
+  X-Robots-Tag: noindex, nofollow
+
+/marble-hole/*
+  X-Robots-Tag: noindex, nofollow
+
+/portscanner/*
+  X-Robots-Tag: noindex, nofollow
+
+/speedtest/*
+  X-Robots-Tag: noindex, nofollow

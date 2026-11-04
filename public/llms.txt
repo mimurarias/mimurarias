@@ -1,0 +1,36 @@
+# Mimurarias
+
+> Site oficial da Mimurarias (https://mimurarias.com). Hub oficial para os aplicativos Android publicados no Google Play, detalhes técnicos e políticas de privacidade.
+
+## Apps oficiais no Google Play
+
+- [APK AppSec: Secrets e Falhas](https://play.google.com/store/apps/details?id=br.com.mimurarias.apkappsec)
+  - Página de detalhes: https://mimurarias.com/apps/apkappsec/
+  - Pacote Android: `br.com.mimurarias.apkappsec`
+  - Função: auditoria estática de segurança e conformidade de arquivos APK, executada localmente no aparelho (100% offline e sem root).
+  - Política de privacidade: https://mimurarias.com/apkappsec/privacy (pt-BR) · https://mimurarias.com/apkappsec/privacy-en (en)
+- [Network Ping Test: Latência](https://play.google.com/store/apps/details?id=br.com.mimurarias.pingtest)
+  - Página de detalhes: https://mimurarias.com/apps/pingtest/
+  - Pacote Android: `br.com.mimurarias.pingtest`
+  - Função: teste de latência, perda de pacotes e conectividade de rede com ping TCP nas portas 80 e 443 (supera bloqueios ICMP).
+  - Política de privacidade: https://mimurarias.com/pingtest/privacy (pt-BR)
+- [Lanterna estroboscópica SOS](https://play.google.com/store/apps/details?id=br.com.mimurarias.flashlight)
+  - Página de detalhes: https://mimurarias.com/apps/flashlight/
+  - Pacote Android: `br.com.mimurarias.flashlight`
+  - Função: lanterna rápida com brilho contínuo, modo estroboscópio regulável (1–30 Hz) e código internacional de socorro SOS.
+  - Política de privacidade: https://mimurarias.com/flashlight/privacy (pt-BR) · https://mimurarias.com/flashlight/privacy-en (en)
+- [Jogo da Velha](https://play.google.com/store/apps/details?id=br.com.mimurarias.tictactoe)
+  - Página de detalhes: https://mimurarias.com/apps/tictactoe/
+  - Pacote Android: `br.com.mimurarias.tictactoe`
+  - Função: jogo da velha moderno com IA em 10 níveis de dificuldade, modo dois jogadores no mesmo aparelho, estatísticas e tema OLED.
+  - Política de privacidade: https://mimurarias.com/tictactoe/privacy (pt-BR) · https://mimurarias.com/tictactoe/privacy-en (en)
+
+## Perfis e arquivos oficiais
+
+- [Perfil do desenvolvedor Mimurarias no Google Play](https://play.google.com/store/apps/developer?id=Mimurarias)
+- [app-ads.txt](https://mimurarias.com/app-ads.txt)
+- [Sitemap](https://mimurarias.com/sitemap.xml)
+
+## Contato
+
+- E-mail: support@mimurarias.com
