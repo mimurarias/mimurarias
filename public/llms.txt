@@ -25,6 +25,14 @@
   - Função: jogo da velha moderno com IA em 10 níveis de dificuldade, modo dois jogadores no mesmo aparelho, estatísticas e tema OLED.
   - Política de privacidade: https://mimurarias.com/tictactoe/privacy (pt-BR) · https://mimurarias.com/tictactoe/privacy-en (en)
 
+## Jogos Web Online (Gratuitos no Navegador)
+
+- [Catálogo de Jogos Mimurarias](https://mimurarias.com/jogos/)
+- [Flappy da Lua Diferente](https://mimurarias.com/jogos/flappy-lua-diferente/)
+  - Função: jogo estilo Flappy Bird com a personagem Lua Diferente voando pelo cosmos entre obstáculos, trilha sonora oficial e ranking online global.
+- [Labirinto da Lua Diferente](https://mimurarias.com/jogos/labirinto-lua-diferente/)
+  - Função: jogo de labirinto infinito procedural com a personagem Lua Diferente, fogo e fragmentos de lua.
+
 ## Perfis e arquivos oficiais
 
 - [Perfil do desenvolvedor Mimurarias no Google Play](https://play.google.com/store/apps/developer?id=Mimurarias)
