@@ -33,6 +33,11 @@
 - [Labirinto da Lua Diferente](https://mimurarias.com/jogos/labirinto-lua-diferente/)
   - Função: jogo de labirinto infinito procedural com a personagem Lua Diferente, fogo e fragmentos de lua.
 
+## Políticas unificadas e termos
+
+- [Termos de Serviço Unificados](https://mimurarias.com/terms) (pt-BR) · [English](https://mimurarias.com/terms-en)
+- [Política de Privacidade Unificada](https://mimurarias.com/privacy) (pt-BR) · [English](https://mimurarias.com/privacy-en)
+
 ## Perfis e arquivos oficiais
 
 - [Perfil do desenvolvedor Mimurarias no Google Play](https://play.google.com/store/apps/developer?id=Mimurarias)

@@ -92,6 +92,14 @@ export default {
       return handleFlappyScores(request, env);
     }
 
+    if (url.pathname === "/termos-de-uso" || url.pathname === "/termos-de-uso/") {
+      return Response.redirect(new URL("/terms", request.url), 301);
+    }
+
+    if (url.pathname === "/politica-de-privacidade" || url.pathname === "/politica-de-privacidade/") {
+      return Response.redirect(new URL("/privacy", request.url), 301);
+    }
+
     return env.ASSETS.fetch(request);
   },
 };
